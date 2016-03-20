@@ -3,6 +3,7 @@
 #include <math.h>
 #include <stdlib.h>
 #include <conio.h>
+#include <ctime>
 
 const int N=9;
  
@@ -164,6 +165,7 @@ void bvp(){
          }
          
         //’од Ѕота;
+        ncheck=0;
         flag=1;
         delay(500);
         //первый ход бота;
@@ -214,8 +216,8 @@ void bvp(){
         if(random==7){
          a[7]=1;
          setlinestyle(SOLID_LINE,2,THICK_WIDTH);                                                                                     
-         line(6,6,133,133);
-         line(133,6,6,133); 
+         line(6,272,133,399);
+         line(133,272,6,399);
          continue;             
         }
         if(random==8){
@@ -268,8 +270,8 @@ void bvp(){
         if(a[2]==1){          
         if(a[7]==0){
          a[7]=1;                                                                                     
-         line(6,6,133,133);
-         line(133,6,6,133); 
+         line(6,272,133,399);
+         line(133,272,6,399);
          continue;     
         }
         if(a[6]==0){
@@ -324,8 +326,8 @@ void bvp(){
         }
         if(a[7]==0){
          a[7]=1;                                                                                     
-         line(6,6,133,133);
-         line(133,6,6,133);
+         line(6,272,133,399);
+         line(133,272,6,399);
          continue;      
         }
         if(a[1]==0){
@@ -352,8 +354,8 @@ void bvp(){
         }
         if(random==3){
         a[7]=1;                                                                                     
-         line(6,6,133,133);
-         line(133,6,6,133);
+        line(6,272,133,399);
+        line(133,272,6,399);
          continue;              
         }
         if(random==4){
@@ -408,8 +410,8 @@ void bvp(){
         if(a[7]==0){
          a[7]=1;
          setlinestyle(SOLID_LINE,2,THICK_WIDTH);                                                                                     
-         line(6,6,133,133);
-         line(133,6,6,133); 
+         line(6,272,133,399);
+         line(133,272,6,399); 
          continue;             
         }
         if(a[8]==0){
@@ -427,9 +429,9 @@ void bvp(){
          continue;             
         } 
         }
-        
+     
         //третий ход бота;
-        if(num==3){
+        if(num==3||num==4||num==5){                        
           //проверка парных крестиков в строке;                   
           for(j=0;j<7;j+=3){     
          if((a[j+1]+a[j+2]+a[j+3])==2){
@@ -482,8 +484,8 @@ void bvp(){
         if(j==6){
         if(a[j+1]==0){
         a[7]=1;                                                                                                                                                                           
-        line(6,6,133,133);
-        line(133,6,6,133);
+        line(6,272,133,399);
+        line(133,272,6,399);
         ncheck=1;
         continue;             
         }
@@ -525,8 +527,8 @@ void bvp(){
        }
        if(a[j+7]==0){
        a[7]=1;                                                                                                                                                                           
-       line(6,6,133,133);
-       line(133,6,6,133);
+       line(6,272,133,399);
+       line(133,272,6,399);
        ncheck=1;
        continue;             
        }         
@@ -616,12 +618,269 @@ void bvp(){
       }
       if(a[7]==0){
       a[7]=1;                                                                                                                                                                           
-      line(6,6,133,133);
-      line(133,6,6,133);
+      line(6,272,133,399);
+      line(133,272,6,399);
       continue;            
       }                        
-     }    
+     }
+       //проверка парных ноликов в строке;                   
+          for(j=0;j<7;j+=3){     
+         if((a[j+1]+a[j+2]+a[j+3])==8){
+         if(j==0){
+         if(a[j+1]==0){
+         a[1]=1;                                                                                     
+         line(6,6,133,133);
+         line(133,6,6,133);
+         ncheck=1;
+         continue;
+         }        
+        if(a[j+2]==0){
+         a[2]=1;                                                                                                                                                                          
+         line(139,6,266,133);
+         line(266,6,139,133);
+         ncheck=1;
+         continue;             
         }
+        if(a[j+3]==0){
+        a[3]=1;                                                                                                                                                                           
+        line(272,6,399,133);
+        line(399,6,272,133);
+         ncheck=1;
+         continue;
+        }
+        }
+        if(j==3){
+        if(a[j+1]==0){
+         a[4]=1;                                                                                                                                                                          
+         line(6,139,133,266);
+         line(133,139,6,266);
+         ncheck=1;
+         continue;
+        }
+        if(a[j+2]==0){
+         a[5]=1;
+         line(139,139,266,266);
+         line(266,139,139,266);
+         ncheck=1;
+         continue;    
+        }
+        if(a[j+3]==0){
+         a[6]=1;                                                                                                                                                                         
+         line(272,139,399,266);
+         line(399,139,272,266);
+         ncheck=1;
+         continue;             
+        }         
+        }
+        if(j==6){
+        if(a[j+1]==0){
+        a[7]=1;                                                                                                                                                                           
+        line(6,272,133,399);
+        line(133,272,6,399);
+        ncheck=1;
+        continue;             
+        }
+        if(a[j+2]==0){
+        a[8]=1;                                                                                                                                                                          
+        line(139,272,266,399);
+        line(266,272,139,399);
+        ncheck=1;
+        continue;             
+        }
+        if(a[j+3]==0){
+        a[9]=1;                                                                                                                                                                         
+        line(272,272,399,399);
+        line(272,399,399,272);
+        ncheck=1;
+        continue;              
+        }         
+        }                              
+       }                              
+      }
+      if(ncheck==1)continue;
+      //проверка парных ноликов в столбце;
+      for(j=0;j<3;j++){
+       if((a[j+1]+a[j+4]+a[j+7])==8){
+       if(j==0){
+       if(a[j+1]==0){
+       a[1]=1;                                                                                     
+       line(6,6,133,133);
+       line(133,6,6,133);
+       ncheck=1;
+       continue;             
+       }
+       if(a[j+4]==0){
+       a[4]=1;                                                                                                                                                                          
+       line(6,139,133,266);
+       line(133,139,6,266);
+       ncheck=1;
+       continue;             
+       }
+       if(a[j+7]==0){
+       a[7]=1;                                                                                                                                                                           
+       line(6,272,133,399);
+       line(133,272,6,399);
+       ncheck=1;
+       continue;             
+       }         
+       }
+       if(j==1){
+       if(a[j+1]==0){
+       a[2]=1;                                                                                                                                                                          
+       line(139,6,266,133);
+       line(266,6,139,133);
+       ncheck=1;
+       continue;             
+       }
+       if(a[j+4]==0){
+       a[5]=1;
+       line(139,139,266,266);
+       line(266,139,139,266);
+       ncheck=1;
+       continue;              
+       }
+       if(a[j+7]==0){
+       a[8]=1;                                                                                                                                                                          
+       line(139,272,266,399);
+       line(266,272,139,399);
+       ncheck=1;
+       continue;             
+       }         
+       }
+       if(j==2){
+       if(a[j+1]==0){
+       a[3]=1;                                                                                                                                                                           
+       line(272,6,399,133);
+       line(399,6,272,133);
+       ncheck=1;
+       continue;     
+       }
+       if(a[j+4]==0){
+       a[6]=1;                                                                                                                                                                         
+       line(6,6,133,133);
+       line(133,6,6,133);
+       ncheck=1;
+       continue;              
+       }
+       if(a[j+7]==0){
+       a[9]=1;                                                                                                                                                                         
+       line(272,272,399,399);
+       line(272,399,399,272);
+       ncheck=1;
+       continue;              
+       }         
+       }                                
+      }           
+     }
+     if(ncheck==1)continue;
+     //проверка парных ноликов по диагонали;
+     if((a[1]+a[5]+a[9])==8){
+      if(a[1]==0){
+      a[1]=1;                                                                                     
+      line(6,6,133,133);
+      line(133,6,6,133);
+      continue;           
+      }
+      if(a[5]==0){
+      a[5]=1;                                                                                                                                                                         
+      line(139,139,266,266);
+      line(266,139,139,266);
+      continue;
+      }
+      if(a[9]==0){
+      a[9]=1;                                                                                                                                                                         
+      line(272,272,399,399);
+      line(272,399,399,272);
+      continue;            
+      }                        
+     }
+      if((a[3]+a[5]+a[7])==8){
+      if(a[3]==0){
+      a[3]=1;                                                                                                                                                                           
+      line(272,6,399,133);
+      line(399,6,272,133);
+      continue;            
+      }
+      if(a[5]==0){
+      a[5]=1;                                                                                                                                                                         
+      line(139,139,266,266);
+      line(266,139,139,266);
+      continue;
+      }
+      if(a[7]==0){
+      a[7]=1;                                                                                                                                                                           
+      line(6,272,133,399);
+      line(133,272,6,399);
+      continue;            
+      }                        
+     }
+      
+     //другие варианты;
+     if(a[1]==0){
+        a[1]=1;
+        setlinestyle(SOLID_LINE,2,THICK_WIDTH);                                                                                     
+         line(6,6,133,133);
+         line(133,6,6,133);
+         continue;              
+        }
+        if(a[2]==0){
+        a[2]=1;
+        setlinestyle(SOLID_LINE,2,THICK_WIDTH);                                                                                     
+         line(139,6,266,133);
+         line(266,6,139,133);
+         continue;            
+        }
+        if(a[3]==0){
+        a[3]=1;
+        setlinestyle(SOLID_LINE,2,THICK_WIDTH);                                                                                     
+         line(272,6,399,133);
+         line(399,6,272,133);             
+        continue;
+        }
+        if(a[4]==0){
+        a[4]=1;
+        setlinestyle(SOLID_LINE,2,THICK_WIDTH);                                                                                     
+         line(6,139,133,266);
+         line(133,139,6,266);
+         continue;             
+        }
+        if(a[5]==0){
+        a[5]=1;
+        setlinestyle(SOLID_LINE,2,THICK_WIDTH);                                                                                     
+         line(139,139,266,266);
+         line(266,139,139,266);
+         continue;             
+        }
+        if(a[6]==0){
+        a[6]=1;
+        setlinestyle(SOLID_LINE,2,THICK_WIDTH);                                                                                     
+         line(272,139,399,266);
+         line(399,139,272,266); 
+         continue;            
+        }
+        if(a[7]==0){
+         a[7]=1;
+         setlinestyle(SOLID_LINE,2,THICK_WIDTH);                                                                                     
+         line(6,272,133,399);
+         line(133,272,6,399); 
+         continue;             
+        }
+        if(a[8]==0){
+        a[8]=1;
+        setlinestyle(SOLID_LINE,2,THICK_WIDTH);                                                                                     
+         line(139,272,266,399);
+         line(266,272,139,399); 
+         continue;            
+        }
+        if(a[9]==0){
+        a[9]=1;
+        setlinestyle(SOLID_LINE,2,THICK_WIDTH);                                                                                     
+         line(272,272,399,399);
+         line(272,399,399,272);
+         continue;             
+        }   
+        }
+        continue;
          
         Player:
         //ход игрока;
@@ -961,45 +1220,23 @@ void pvb(){
          circle(202,202,64);
          continue;
          }
-         newr:
-         random=(rand()%9)+1;
-         if(random==5) goto newr;
+         random=(rand()%4)+1;
          if(random==1){
          a[1]=4;                                                                                     
          circle(69,69,64);
          continue;
          }
-         if(random==2){
-         a[2]=4;                                                                                                                                                                          
-         circle(202,69,64);
-         continue;    
-         }
-         if(random==3){
+         if(random==1){
          a[3]=4;                                                                                                                                                                           
          circle(335,69,64);
          continue;                          
          }
-         if(random==4){
-         a[4]=4;                                                                                                                                                                          
-         circle(69,202,64);
-         continue;                    
-         }
-         if(random==6){
-         a[6]=4;                                                                                                                                                                         
-         circle(335,202,64);
-         continue;                     
-         }
-         if(random==7){
+         if(random==3){
          a[7]=4;                                                                                                                                                                           
          circle(69,335,64);
          continue;                 
          }
-         if(random==8){
-         a[8]=4;                                                                                                                                                                          
-         circle(202,335,64);
-         continue;                    
-         }
-         if(random==9){
+         if(random==4){
          a[9]=4;                                                                                                                                                                         
          circle(335,335,64);
          continue;                    
@@ -1069,7 +1306,7 @@ void pvb(){
       if(ncheck==1)continue;
       //проверка парных кресников в столбце;
       for(j=0;j<3;j++){
-         if((a[j+1]+a[j+4]+a[j+7])==2){
+      if((a[j+1]+a[j+4]+a[j+7])==2){
        if(j==0){
        if(a[j+1]==0){
        a[1]=4;                                                                                     
@@ -1198,45 +1435,22 @@ void pvb(){
       continue;                  
      }
      //другие варианты 
-     for(j=1;j<10;j++){
-     if(a[j]==0) break;                  
-     }
-    if(j==1){
+    if(a[1]==0){
      a[1]=4;                                                                                     
      circle(69,69,64);
      continue;        
     }
-    if(j==2){
-     a[2]=4;                                                                                                                                                                          
-     circle(202,69,64);
-     continue;        
-    }
-    if(j==3){
+    if(a[3]==0){
      a[3]=4;                                                                                                                                                                           
      circle(335,69,64);
      continue;        
     }
-    if(j==4){
-     a[4]=4;                                                                                                                                                                          
-     circle(69,202,64);
-     continue;        
-    }
-    if(j==6){
-     a[6]=4;                                                                                                                                                                         
-     circle(335,202,64);
-     continue;         
-    }
-    if(j==7){
+    if(a[7]==0){
      a[7]=4;                                                                                                                                                                           
      circle(69,335,64);
      continue;        
     }
-    if(j==8){
-     a[8]=4;                                                                                                                                                                          
-     circle(202,335,64);
-     continue;        
-    }
-    if(j==9){
+    if(a[9]==0){
      a[9]=4;                                                                                                                                                                         
      circle(335,335,64);
      continue;        
@@ -2016,6 +2230,7 @@ int finmenu(){
      }
      
 int main(){
+    srand(time(NULL));    
 //старновое меню;
 int smenu,pmenu,flag,check=1;
 menu:
@@ -2029,6 +2244,8 @@ settextstyle(4,0,4);
     outtextxy(100,120,"Play Game");
     outtextxy(100,220,"Exit Game");
     while(flag){
+    clearmouseclick(WM_LBUTTONDOWN);
+    delay(30);              
     if(ismouseclick(WM_LBUTTONDOWN)&&mousex()>95&&mousex()<310&&mousey()>115&&mousey()<165){
     flag=0;
     smenu=1;                                            
@@ -2046,6 +2263,8 @@ if(smenu==1){
     outtextxy(65,225,"Bot vs Player");
     outtextxy(150,305,"Back");
     while(flag==0){
+    clearmouseclick(WM_LBUTTONDOWN);
+    delay(30);               
     if(ismouseclick(WM_LBUTTONDOWN)&&mousex()>145&&mousex()<250&&mousey()>300&&mousey()<350){
     flag=1;
     cleardevice();                                                                                     
