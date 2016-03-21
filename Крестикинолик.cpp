@@ -6,11 +6,43 @@
 #include <ctime>
 
 const int N=9;
- 
-    
+  
+int pscore=0,bscore=0,tscore=0; 
+  
+void score(int n=0){
+if(n==1){
+setcolor(14);
+settextstyle(8,0,2);
+outtextxy(520,80,"score:");
+outtextxy(482,130,"Player One: ");
+bgiout <<pscore;
+outstreamxy(617,130);
+outtextxy(482,180,"Player Two: ");
+bgiout <<bscore;
+outstreamxy(617,180);
+outtextxy(480,230,"Drawn Game: ");
+bgiout <<tscore;
+outstreamxy(615,230);         
+} 
+else{    
+setcolor(14);
+settextstyle(8,0,2);
+outtextxy(520,80,"score:");
+outtextxy(492,130,"Game Won: ");
+bgiout <<pscore;
+outstreamxy(600,130);
+outtextxy(485,180,"Game Lose: ");
+bgiout <<bscore;
+outstreamxy(605,180);
+outtextxy(480,230,"Drawn Game: ");
+bgiout <<tscore;
+outstreamxy(615,230);      
+}  
+}
+     
 //поле игры;
 void grid(){
-initwindow(405,405);
+initwindow(705,405);
 setfillstyle(1,15);
 floodfill(0,0,1);
 setcolor(0);
@@ -29,6 +61,7 @@ void bvp(){
      int a[N],i,j,y=-68,x1=-64,y1=-64,prob=0,flag=0,sum,num=1,random,ncheck=0;
      for(i=1;i<=N;i++)
     a[i]=0;
+    score();
      while(prob==0){
          setcolor(2);
          //проверка выигрыша крестика;
@@ -41,9 +74,14 @@ void bvp(){
          for(i=7;i<378;i+=7){
          delay(10);
          line(i,y+136,i+25,y+136);
-         }                        
-         moveto(147,203);
-         outtext("Player One WIN!");
+         }
+         bscore++;
+         bgiout <<bscore;
+         outstreamxy(605,180);
+         setfillstyle(1,15);
+         bar(406,275,705,330);
+         moveto(495,280);
+         outtext("Bot WIN!");                        
          prob=1;
          }
          }
@@ -59,8 +97,13 @@ void bvp(){
          delay(10);
          line(y+136,i,y+136,i+25);
          }
-         moveto(147,203);
-         outtext("Player One WIN!");
+         bscore++;
+         bgiout <<bscore;
+         outstreamxy(605,180);
+         setfillstyle(1,15);
+         bar(406,275,705,330);
+         moveto(495,280);
+         outtext("Bot WIN!");
          prob=1;                           
          }
          }
@@ -72,8 +115,13 @@ void bvp(){
          delay(10);
          line(i,i,i+25,i+25);
          }
-         moveto(147,203);
-         outtext("Player One WIN!");
+         bscore++;
+         bgiout <<bscore;
+         outstreamxy(605,180);
+         setfillstyle(1,15);
+         bar(406,275,705,330);
+         moveto(495,280);
+         outtext("Bot WIN!");
          prob=1;                                           
          }
          if(prob==1) break;
@@ -83,8 +131,13 @@ void bvp(){
          delay(10);
          line(i,j,i-25,j+25);
          }
-         moveto(147,203);
-         outtext("Player One WIN!");
+         bscore++;
+         bgiout <<bscore;
+         outstreamxy(605,180);
+         setfillstyle(1,15);
+         bar(406,275,705,330);
+         moveto(495,280);
+         outtext("Bot WIN!");
          prob=1;                                           
          }
          if(prob==1) break;
@@ -98,9 +151,14 @@ void bvp(){
          for(i=7;i<378;i+=7){
          delay(10);
          line(i,y+136,i+25,y+136);
-         }                        
-         moveto(170,203);
-         outtext("Bot WIN!");
+         }
+         pscore++;
+         bgiout <<pscore;
+         outstreamxy(600,130); 
+         setfillstyle(1,15);
+         bar(406,275,705,330);                       
+         moveto(440,280);
+         outtext("Player WIN!");
          prob=1;
          }
          }
@@ -116,8 +174,13 @@ void bvp(){
          delay(10);
          line(y+136,i,y+136,i+25);
          }
-         moveto(170,203);
-         outtext("Bot WIN!");
+         pscore++;
+         bgiout <<pscore;
+         outstreamxy(600,130);
+         setfillstyle(1,15);
+         bar(406,275,705,330);
+         moveto(440,280);
+         outtext("Player One WIN!");
          prob=1;                           
          }
          }
@@ -129,8 +192,13 @@ void bvp(){
          delay(10);
          line(i,i,i+25,i+25);
          }
-         moveto(170,203);
-         outtext("Bot WIN!");
+         pscore++;
+         bgiout <<pscore;
+         outstreamxy(600,130);
+         setfillstyle(1,15);
+         bar(406,275,705,330);
+         moveto(440,280);
+         outtext("Player WIN!");
          prob=1;                                           
          }
          if(prob==1) break;
@@ -140,8 +208,13 @@ void bvp(){
          delay(10);
          line(i,j,i-25,j+25);
          }
-         moveto(170,203);
-         outtext("Bot WIN!");
+         pscore++;
+         bgiout <<pscore;
+         outstreamxy(600,130);
+         setfillstyle(1,15);
+         bar(406,275,705,330);
+         moveto(440,280);
+         outtext("Player WIN!");
          prob=1;                                           
          }
          if(prob==1) break;
@@ -152,7 +225,12 @@ void bvp(){
          for(i=1;i<10;i++)
           sum+=a[i];
          if(sum==21){
-         moveto(147,203);
+         tscore++;            
+         bgiout <<tscore;
+         outstreamxy(615,230);             
+         setfillstyle(1,15);
+         bar(406,275,705,330);            
+         moveto(465,280);
          outtext("Nobody has won");
          prob=1;
          }           
@@ -160,14 +238,16 @@ void bvp(){
          if(prob==1) break;
          //переход на ход игрока;
          if(flag==1){
-         setcolor(9);
          goto Player;
          }
          
         //’од Ѕота;
         ncheck=0;
         flag=1;
-        delay(500);
+        setcolor(14);               
+        outtextxy(420,280,"it's the bot's turn...");          
+        setcolor(12);
+        delay(800);
         //первый ход бота;
         if(num==1){
         random=rand()%9+1;
@@ -757,8 +837,8 @@ void bvp(){
        }
        if(a[j+4]==0){
        a[6]=1;                                                                                                                                                                         
-       line(6,6,133,133);
-       line(133,6,6,133);
+       line(272,139,399,266);
+       line(399,139,272,266); 
        ncheck=1;
        continue;              
        }
@@ -883,6 +963,11 @@ void bvp(){
         continue;
          
         Player:
+         setfillstyle(1,15);
+         bar(406,275,705,330);
+         setcolor(14);               
+         outtextxy(440,280,"it's a your turn...");
+         setcolor(9);      
         //ход игрока;
          if(ismouseclick(WM_LBUTTONDOWN)) 
          clearmouseclick(WM_LBUTTONDOWN);
@@ -977,7 +1062,8 @@ void pvb(){
     int a[N],i,j,y=-68,x1=-64,y1=-64,prob=0,flag=0,sum,num=0,random,ncheck=0;
     for(i=1;i<=N;i++)
     a[i]=0;
-     while(prob==0){
+    score();
+     while(prob==0){           
          setcolor(2);
          //проверка выигрыша крестика;
          if(prob==0){
@@ -989,8 +1075,13 @@ void pvb(){
          for(i=7;i<378;i+=7){
          delay(10);
          line(i,y+136,i+25,y+136);
-         }                        
-         moveto(147,203);
+         }
+         pscore+=1;
+         bgiout <<pscore;
+         outstreamxy(600,130); 
+         setfillstyle(1,15);
+         bar(406,275,705,330);                       
+         moveto(465,280);
          outtext("Player One WIN!");
          prob=1;
          }
@@ -1007,7 +1098,12 @@ void pvb(){
          delay(10);
          line(y+136,i,y+136,i+25);
          }
-         moveto(147,203);
+         pscore+=1;
+         bgiout <<pscore;
+         outstreamxy(600,130);
+         setfillstyle(1,15);
+         bar(406,275,705,330);
+         moveto(465,280);
          outtext("Player One WIN!");
          prob=1;                           
          }
@@ -1020,7 +1116,12 @@ void pvb(){
          delay(10);
          line(i,i,i+25,i+25);
          }
-         moveto(147,203);
+         pscore+=1;
+         bgiout <<pscore;
+         outstreamxy(600,130);
+         setfillstyle(1,15);
+         bar(406,275,705,330);
+         moveto(465,280);
          outtext("Player One WIN!");
          prob=1;                                           
          }
@@ -1031,7 +1132,12 @@ void pvb(){
          delay(10);
          line(i,j,i-25,j+25);
          }
-         moveto(147,203);
+         pscore+=1;
+         bgiout <<pscore;
+         outstreamxy(600,130);
+         setfillstyle(1,15);
+         bar(406,275,705,330);
+         moveto(465,280);
          outtext("Player One WIN!");
          prob=1;                                           
          }
@@ -1046,8 +1152,13 @@ void pvb(){
          for(i=7;i<378;i+=7){
          delay(10);
          line(i,y+136,i+25,y+136);
-         }                        
-         moveto(170,203);
+         }
+         bscore+=1;
+         bgiout <<bscore;
+         outstreamxy(605,180);
+         setfillstyle(1,15);
+         bar(406,275,705,330);                        
+         moveto(495,280);
          outtext("Bot WIN!");
          prob=1;
          }
@@ -1064,7 +1175,12 @@ void pvb(){
          delay(10);
          line(y+136,i,y+136,i+25);
          }
-         moveto(170,203);
+         bscore+=1;
+         bgiout <<bscore;
+         outstreamxy(605,180);
+         setfillstyle(1,15);
+         bar(406,275,705,330);
+         moveto(495,280);
          outtext("Bot WIN!");
          prob=1;                           
          }
@@ -1077,7 +1193,12 @@ void pvb(){
          delay(10);
          line(i,i,i+25,i+25);
          }
-         moveto(170,203);
+         bscore+=1;
+         bgiout <<bscore;
+         outstreamxy(605,180);
+         setfillstyle(1,15);
+         bar(406,275,705,330);
+         moveto(495,280);
          outtext("Bot WIN!");
          prob=1;                                           
          }
@@ -1088,7 +1209,12 @@ void pvb(){
          delay(10);
          line(i,j,i-25,j+25);
          }
-         moveto(170,203);
+         bscore+=1;
+         bgiout <<bscore;
+         outstreamxy(605,180);
+         setfillstyle(1,15);
+         bar(406,275,705,330);
+         moveto(495,280);
          outtext("Bot WIN!");
          prob=1;                                           
          }
@@ -1100,7 +1226,12 @@ void pvb(){
          for(i=1;i<10;i++)
           sum+=a[i];
          if(sum==21){
-         moveto(147,203);
+         tscore+=1;
+         bgiout <<tscore;
+         outstreamxy(615,230);            
+         setfillstyle(1,15);
+         bar(406,275,705,330);            
+         moveto(465,280);
          outtext("Nobody has won");
          prob=1;
          }           
@@ -1108,9 +1239,13 @@ void pvb(){
          if(prob==1) break;
          //переход на ход бота;
          if(flag==1){
-         delay(500);
          goto bot;
          }
+         setfillstyle(1,15);
+         bar(406,275,705,330);
+         setcolor(14);               
+         outtextxy(440,280,"it's a your turn...");
+         setcolor(12);
          //ход игрока;
          if(ismouseclick(WM_LBUTTONDOWN)) 
          clearmouseclick(WM_LBUTTONDOWN);
@@ -1210,8 +1345,11 @@ void pvb(){
          //ход бота;
          bot:
          ncheck=0;
-         flag=0;          
+         flag=0;
+         setcolor(14);               
+         outtextxy(420,280,"it's the bot's turn...");          
          setcolor(9);
+         delay(800);
          setlinestyle(SOLID_LINE,2,THICK_WIDTH);
          //первый ход;
          if(num==1){
@@ -1226,7 +1364,7 @@ void pvb(){
          circle(69,69,64);
          continue;
          }
-         if(random==1){
+         if(random==2){
          a[3]=4;                                                                                                                                                                           
          circle(335,69,64);
          continue;                          
@@ -1912,6 +2050,7 @@ void pvp(){
     int a[N]={0},i,j,y=-68,prob=0,flag=0,sum;
     for(i=1;i<=N;i++)
     a[i]=0;
+    score(1);
      while(prob==0){
          setcolor(2);
          //проверка выигрыша крестика;
@@ -1922,15 +2061,21 @@ void pvp(){
          if(j==6) y+=270;                                 
          setlinestyle(1,1,5);         
          for(i=7;i<378;i+=7){
-         delay(1);
+         delay(10);
          line(i,y+136,i+25,y+136);
-         }                        
-         moveto(147,203);
+         }
+         pscore++;
+         bgiout <<pscore;
+         outstreamxy(617,130);
+         setfillstyle(1,15);
+         bar(406,280,705,400);                        
+         moveto(465,280);
          outtext("Player One WIN!");
          prob=1;
          }
          }
          }
+         if(prob==1) break;
          if(prob==0){
          for(j=0;j<3;j++){
          if((a[j+1]+a[j+4]+a[j+7])==3){
@@ -1938,35 +2083,53 @@ void pvp(){
          if(j==2) y+=270;
          setlinestyle(1,1,5);         
          for(i=7;i<378;i+=7){
-         delay(1);
+         delay(10);
          line(y+136,i,y+136,i+25);
          }
-         moveto(147,203);
+         pscore++;
+         bgiout <<pscore;
+         outstreamxy(617,130);
+         setfillstyle(1,15);
+         bar(406,280,705,400);                        
+         moveto(465,280);
          outtext("Player One WIN!");
          prob=1;                           
          }
          }
          }
+         if(prob==1) break;
          if(prob==0&&(a[1]+a[5]+a[9]==3)){ 
          setlinestyle(1,1,5);
          for(i=7;i<378;i+=7){
          delay(10);
          line(i,i,i+25,i+25);
          }
-         moveto(147,203);
+         pscore++;
+         bgiout <<pscore;
+         outstreamxy(617,130);
+         setfillstyle(1,15);
+         bar(406,280,705,400);                        
+         moveto(465,280);
          outtext("Player One WIN!");
          prob=1;                                           
          }
+         if(prob==1) break;
          if(prob==0&&(a[3]+a[5]+a[7]==3)){ 
          setlinestyle(1,1,5);
          for(i=398,j=7;i>30;i-=7,j+=7){
          delay(10);
          line(i,j,i-25,j+25);
          }
-         moveto(147,203);
+         pscore++;
+         bgiout <<pscore;
+         outstreamxy(617,130);
+         setfillstyle(1,15);
+         bar(406,280,705,400);                        
+         moveto(465,280);
          outtext("Player One WIN!");
          prob=1;                                           
          }
+         if(prob==1) break;
          //проверка выигрыша нолика;
          if(prob==0){
          for(j=0;j<7;j+=3){     
@@ -1978,12 +2141,18 @@ void pvp(){
          delay(10);
          line(i,y+136,i+25,y+136);
          }                        
-         moveto(147,203);
+         bscore++;
+         bgiout <<bscore;
+         outstreamxy(617,180);
+         setfillstyle(1,15);
+         bar(406,280,705,400);                        
+         moveto(465,280);
          outtext("Player Two WIN!");
          prob=1;
          }
          }
          }
+         if(prob==1) break;
          if(prob==0){
          for(j=0;j<3;j++){
          if((a[j+1]+a[j+4]+a[j+7])==12){
@@ -1994,32 +2163,50 @@ void pvp(){
          delay(10);
          line(y+136,i,y+136,i+25);
          }
-         moveto(147,203);
+         bscore++;
+         bgiout <<bscore;
+         outstreamxy(617,180);
+         setfillstyle(1,15);
+         bar(406,280,705,400);                        
+         moveto(465,280);
          outtext("Player Two WIN!");
          prob=1;                           
          }
          }
          }
+         if(prob==1) break;
          if(prob==0&&(a[1]+a[5]+a[9]==12)){ 
          setlinestyle(1,1,5);
          for(i=7;i<378;i+=7){
          delay(10);
          line(i,i,i+25,i+25);
          }
-         moveto(147,203);
+         bscore++;
+         bgiout <<bscore;
+         outstreamxy(617,180);
+         setfillstyle(1,15);
+         bar(406,280,705,400);                        
+         moveto(465,280);
          outtext("Player Two WIN!");
          prob=1;                                           
          }
+         if(prob==1) break;
          if(prob==0&&(a[3]+a[5]+a[7]==12)){ 
          setlinestyle(1,1,5);
          for(i=398,j=7;i>30;i-=7,j+=7){
          delay(10);
          line(i,j,i-25,j+25);
          }
-         moveto(147,203);
+         bscore++;
+         bgiout <<bscore;
+         outstreamxy(617,180);
+         setfillstyle(1,15);
+         bar(406,280,705,400);                        
+         moveto(465,280);
          outtext("Player Two WIN!");
          prob=1;                                           
          }
+         if(prob==1) break;
          setcolor(12);
          //проверка ничьи;
          if(prob==0){
@@ -2027,11 +2214,17 @@ void pvp(){
          for(i=1;i<10;i++)
           sum+=a[i];
          if(sum==21){
-         moveto(147,203);
+         tscore++;            
+         bgiout <<tscore;
+         outstreamxy(615,230);
+         setfillstyle(1,15);
+         bar(406,280,705,400);                      
+         moveto(465,280);
          outtext("Nobody has won");
          prob=1;
          }           
          }
+         if(prob==1) break;
          //переход на ход второго игрока;
          if(flag==1){
          if(ismouseclick(WM_LBUTTONDOWN)) 
@@ -2039,6 +2232,10 @@ void pvp(){
          delay(30);
          goto PlayerTwo;
          }
+         setcolor(14);               
+         outtextxy(455,280,"it's turn of the");
+         outtextxy(470,305,"player one...");
+         setcolor(12);
          //ход первого игрока;
          if(ismouseclick(WM_LBUTTONDOWN)) 
          clearmouseclick(WM_LBUTTONDOWN);
@@ -2128,7 +2325,10 @@ void pvp(){
          
          //ход второго игрока;
          PlayerTwo:
-         setcolor(9);         
+         setcolor(14);               
+         outtextxy(455,280,"it's turn of the");
+         outtextxy(470,305,"player two...");
+         setcolor(9);                  
          if(a[1]==0&&ismouseclick(WM_LBUTTONDOWN)&&mousex()>6&&mousex()<133&&mousey()>6&&mousey()<133){
          clearmouseclick(WM_LBUTTONDOWN);
          flag=0;
@@ -2216,7 +2416,7 @@ int finmenu(){
      outtextxy(250,160,"NO!");
      setcolor(14);
      outtextxy(60,270,"EXIT TO MAIN MENU");
-     while(flag){
+     while(flag){                      
      if(ismouseclick(WM_LBUTTONDOWN)&&mousex()>95&&mousex()<160&&mousey()>150&&mousey()<185){
      return(1);
      }
@@ -2284,7 +2484,7 @@ if(smenu==1){
     }
     }
 }
-play:
+play:   
 if(pmenu==1){
 closegraph();             
 //игрок против игрока;                                               
@@ -2299,12 +2499,16 @@ closegraph();
 goto play;
 }
 if(finmenu()==2){
+pscore=0;
+bscore=0;
+tscore=0;                  
 closegraph();
 initwindow(405,405);
 goto menu;
 }
 }
 if(pmenu==2){
+play_one:             
 closegraph();             
 //игрок против бота;                                               
 grid();    
@@ -2315,9 +2519,12 @@ initwindow(405,405);
 finmenu();
 if(finmenu()==1){
 closegraph();                                 
-goto play;
+goto play_two;
 }
 if(finmenu()==2){
+pscore=0;
+bscore=0;
+tscore=0;                  
 closegraph();
 initwindow(405,405);
 goto menu;
@@ -2325,6 +2532,7 @@ goto menu;
 }
 //Ѕот против игрока;
 if(pmenu==3){
+play_two:             
 closegraph();             
 grid();
 bvp();
@@ -2334,9 +2542,12 @@ initwindow(405,405);
 finmenu();
 if(finmenu()==1){
 closegraph();                                 
-goto play;
+goto play_one;
 }
 if(finmenu()==2){
+pscore=0;
+bscore=0;
+tscore=0;                 
 closegraph();
 initwindow(405,405);
 goto menu;
