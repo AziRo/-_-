@@ -57,10 +57,28 @@ bar(405,399,0,405);
 bar(0,0,6,405);
 }
 
+//Функция рисования крестика
+void  cross(int a){
+        if(a==1){line(6,6,133,133); line(133,6,6,133); return;}
+        if(a==2){line(139,6,266,133); line(266,6,139,133); return;}
+        if(a==3){line(272,6,399,133); line(399,6,272,133); return;}
+        if(a==4){line(6,139,133,266); line(133,139,6,266); return;}
+        if(a==5){line(139,139,266,266); line(266,139,139,266); return;}
+        if(a==6){line(272,139,399,266); line(399,139,272,266); return;}
+        if(a==7){line(6,272,133,399); line(133,272,6,399); return;}
+        if(a==8){line(139,272,266,399); line(266,272,139,399); return;}
+        if(a==9){line(272,272,399,399); line(272,399,399,272); return;}     
+}
+
+//Другие варианты хода бота
+void casual_play(){
+     
+     }
+
 void bvp(){
      int a[N],i,j,y=-68,x1=-64,y1=-64,prob=0,flag=0,sum,num=1,random,ncheck=0;
      for(i=1;i<=N;i++)
-    a[i]=0;
+     a[i]=0;
     score();
      while(prob==0){
          setcolor(2);
@@ -1063,6 +1081,7 @@ void pvb(){
     for(i=1;i<=N;i++)
     a[i]=0;
     score();
+    setlinestyle(SOLID_LINE,2,THICK_WIDTH); 
      while(prob==0){           
          setcolor(2);
          //проверка выигрыша крестика;
@@ -1321,21 +1340,14 @@ void pvb(){
          continue;
          }
          if(a[8]==0&&ismouseclick(WM_LBUTTONDOWN)&&mousex()>139&&mousex()<266&&mousey()>272&&mousey()<399){
-         clearmouseclick(WM_LBUTTONDOWN);
-         num+=1;
-         flag=1;
-         a[8]=1;                                                                                     
-         setlinestyle(SOLID_LINE,2,THICK_WIDTH);                                                                                     
+         clearmouseclick(WM_LBUTTONDOWN); num+=1; flag=1; a[8]=1;                                                                                                                                                                        
          line(139,272,266,399);
          line(266,272,139,399);
          continue;
          }
          if(a[9]==0&&ismouseclick(WM_LBUTTONDOWN)&&mousex()>272&&mousex()<399&&mousey()>272&&mousey()<399){
-         clearmouseclick(WM_LBUTTONDOWN);
-         num+=1;
-         flag=1;
-         a[9]=1;                                                                                     
-         setlinestyle(SOLID_LINE,2,THICK_WIDTH);                                                                                     
+         clearmouseclick(WM_LBUTTONDOWN); num+=1; flag=1; a[9]=1;                                                                                     
+                                                                                             
          line(272,272,399,399);
          line(272,399,399,272);
          continue;
@@ -1344,255 +1356,90 @@ void pvb(){
          
          //ход бота;
          bot:
-         ncheck=0;
-         flag=0;
-         setcolor(14);               
-         outtextxy(420,280,"it's the bot's turn...");          
-         setcolor(9);
-         delay(800);
-         setlinestyle(SOLID_LINE,2,THICK_WIDTH);
+         ncheck=0; flag=0; setcolor(14); outtextxy(420,280,"it's the bot's turn..."); setcolor(9); delay(800);
          //первый ход;
          if(num==1){
-         if(a[5]==0){
-         a[5]=4;                                                                                                                                                                           
-         circle(202,202,64);
-         continue;
-         }
-         random=(rand()%4)+1;
-         if(random==1){
-         a[1]=4;                                                                                     
-         circle(69,69,64);
-         continue;
-         }
-         if(random==2){
-         a[3]=4;                                                                                                                                                                           
-         circle(335,69,64);
-         continue;                          
-         }
-         if(random==3){
-         a[7]=4;                                                                                                                                                                           
-         circle(69,335,64);
-         continue;                 
-         }
-         if(random==4){
-         a[9]=4;                                                                                                                                                                         
-         circle(335,335,64);
-         continue;                    
-         }
+          if(a[5]==0){a[5]=4; circle(202,202,64); continue;}
+          random=(rand()%4)+1;
+          if(random==1){a[1]=4; circle(69,69,64); continue;}
+          if(random==2){a[3]=4; circle(335,69,64); continue;}
+          if(random==3){a[7]=4; circle(69,335,64); continue;}
+          if(random==4){a[9]=4; circle(335,335,64); continue;}
          }
          //второй ход;
          if(num==2){ 
            //проверка парных крестиков в строке;                   
-          for(j=0;j<7;j+=3){     
-         if((a[j+1]+a[j+2]+a[j+3])==2){
+       for(j=0;j<7;j+=3){     
+        if((a[j+1]+a[j+2]+a[j+3])==2){
          if(j==0){
-         if(a[j+1]==0){
-         a[1]=4;                                                                                     
-         circle(69,69,64);
-         ncheck=1;
-         continue;
-         }        
-        if(a[j+2]==0){
-         a[2]=4;                                                                                                                                                                          
-         circle(202,69,64);
-         ncheck=1;
-         continue;             
-        }
-        if(a[j+3]==0){
-        a[3]=4;                                                                                                                                                                           
-         circle(335,69,64);
-         ncheck=1;
-         continue;
-        }
-        }
-        if(j==3){
-        if(a[j+1]==0){
-         a[4]=4;                                                                                                                                                                          
-         circle(69,202,64);
-         ncheck=1;
-         continue;
-        }
-        if(a[j+3]==0){
-         a[6]=4;                                                                                                                                                                         
-         circle(335,202,64);
-         ncheck=1;
-         continue;             
-        }         
-        }
-        if(j==6){
-        if(a[j+1]==0){
-        a[7]=4;                                                                                                                                                                           
-        circle(69,335,64);
-        ncheck=1;
-        continue;             
-        }
-        if(a[j+2]==0){
-        a[8]=4;                                                                                                                                                                          
-        circle(202,335,64);
-        ncheck=1;
-        continue;             
-        }
-        if(a[j+3]==0){
-        a[9]=4;                                                                                                                                                                         
-         circle(335,335,64);
-         ncheck=1;
-         continue;              
-        }         
+          if(a[j+1]==0){a[1]=4; circle(69,69,64); ncheck=1; break;}        
+          if(a[j+2]==0){a[2]=4; circle(202,69,64); ncheck=1; break;}
+          if(a[j+3]==0){a[3]=4; circle(335,69,64); ncheck=1; break;}
+         }
+         if(j==3){
+          if(a[j+1]==0){a[4]=4; circle(69,202,64); ncheck=1; break;}
+          if(a[j+3]==0){a[6]=4; circle(335,202,64); ncheck=1; break;}         
+         }
+         if(j==6){
+          if(a[j+1]==0){a[7]=4; circle(69,335,64); ncheck=1; break;}
+          if(a[j+2]==0){a[8]=4; circle(202,335,64); ncheck=1; break;}
+          if(a[j+3]==0){a[9]=4; circle(335,335,64); ncheck=1; break;}         
+         }                              
         }                              
-       }                              
-      }
+       }
       if(ncheck==1)continue;
       //проверка парных кресников в столбце;
-      for(j=0;j<3;j++){
+     for(j=0;j<3;j++){
       if((a[j+1]+a[j+4]+a[j+7])==2){
        if(j==0){
-       if(a[j+1]==0){
-       a[1]=4;                                                                                     
-       circle(69,69,64);
-       ncheck=1;
-       continue;             
-       }
-       if(a[j+4]==0){
-       a[4]=4;                                                                                                                                                                          
-       circle(69,202,64);
-       ncheck=1;
-       continue;             
-       }
-       if(a[j+7]==0){
-       a[7]=4;                                                                                                                                                                           
-       circle(69,335,64);
-       ncheck=1;
-       continue;             
-       }         
+        if(a[j+1]==0){a[1]=4; circle(69,69,64); ncheck=1; break;}
+        if(a[j+4]==0){a[4]=4; circle(69,202,64); ncheck=1; break;}
+        if(a[j+7]==0){a[7]=4; circle(69,335,64); ncheck=1; break;}         
        }
        if(j==1){
-       if(a[j+1]==0){
-       a[2]=4;                                                                                                                                                                          
-       circle(202,69,64);
-       ncheck=1;
-       continue;             
-       }
-       if(a[j+7]==0){
-       a[8]=4;                                                                                                                                                                          
-       circle(202,335,64);
-       ncheck=1;
-       continue;             
-       }         
+        if(a[j+1]==0){a[2]=4; circle(202,69,64); ncheck=1; break;}
+        if(a[j+7]==0){a[8]=4; circle(202,335,64); ncheck=1; break;}         
        }
        if(j==2){
-       if(a[j+1]==0){
-       a[3]=4;                                                                                                                                                                           
-       circle(335,69,64);
-       ncheck=1;
-       continue;     
-       }
-       if(a[j+4]==0){
-       a[6]=4;                                                                                                                                                                         
-       circle(335,202,64);
-       ncheck=1;
-       continue;              
-       }
-       if(a[j+7]==0){
-       a[9]=4;                                                                                                                                                                         
-       circle(335,335,64);
-       ncheck=1;
-       continue;              
-       }         
+        if(a[j+1]==0){a[3]=4; circle(335,69,64); ncheck=1; break;}
+        if(a[j+4]==0){a[6]=4; circle(335,202,64); ncheck=1; break;}
+        if(a[j+7]==0){a[9]=4; circle(335,335,64); ncheck=1; break;}         
        }                                
       }           
      }
      if(ncheck==1)continue;
      //проверка парных крестиков по диагонали;
      if((a[1]+a[5]+a[9])==2){
-      if(a[1]==0){
-      a[1]=4;                                                                                     
-      circle(69,69,64);
-      continue;           
-      }
-      if(a[9]==0){
-      a[9]=4;                                                                                                                                                                         
-      circle(335,335,64);
-      continue;            
-      }                        
+      if(a[1]==0){a[1]=4; circle(69,69,64); continue;}
+      if(a[9]==0){a[9]=4; circle(335,335,64); continue;}                        
      }
-      if((a[3]+a[5]+a[7])==2){
-      if(a[3]==0){
-      a[3]=4;                                                                                                                                                                           
-      circle(335,69,64);
-      continue;            
-      }
-      if(a[7]==0){
-      a[7]=4;                                                                                                                                                                           
-      circle(69,335,64);
-      continue;            
-      }                        
+     if((a[3]+a[5]+a[7])==2){
+      if(a[3]==0){a[3]=4; circle(335,69,64); continue;}
+      if(a[7]==0){a[7]=4; circle(69,335,64); continue;}                        
      }
      //проверка на тактические ходы1;
      if((a[1]+a[9])==2||(a[3]+a[7])==2){                 
-     random=((rand()%4)+1);
-     if(random==1){             
-     a[2]=4;                                                                                                                                                                          
-     circle(202,69,64);
-     continue;              
-     }
-     if(random==2){
-     a[6]=4;                                                                                                                                                                         
-     circle(335,202,64);
-     continue;              
-     }
-     if(random==3){
-      a[8]=4;                                                                                                                                                                          
-      circle(202,335,64);
-      continue;              
-     }
-     if(random==4){
-      a[4]=4;                                                                                                                                                                          
-      circle(69,202,64);
-      continue;              
-     }           
+      random=((rand()%4)+1);
+      if(random==1){a[2]=4; circle(202,69,64); continue;}
+      if(random==2){a[6]=4; circle(335,202,64); continue;}
+      if(random==3){a[8]=4; circle(202,335,64); continue;}
+      if(random==4){a[4]=4; circle(69,202,64); continue;}           
      }
      //проверка на тактический ход2;
-     if((a[1]+a[8])==2||(a[9]+a[4])==2){
-     a[7]=4;                                                                                                                                                                           
-     circle(69,335,64);
-     continue;                
-     }
-     if((a[1]+a[6])==2||(a[9]+a[2])==2){
-      a[3]=4;                                                                                                                                                                           
-      circle(335,69,64);
-      continue;        
-     }
-     if((a[3]+a[8])==2||(a[7]+a[6])==2){
-      a[9]=4;                                                                                                                                                                         
-      circle(335,335,64);
-      continue;                
-     }
-     if((a[3]+a[4])==2||(a[7]+a[2])==2){
-      a[1]=4;                                                                                     
-      circle(69,69,64);
-      continue;                  
-     }
+     if((a[1]+a[8])==2||(a[9]+a[4])==2){a[7]=4; circle(69,335,64); continue;}
+     if((a[1]+a[6])==2||(a[9]+a[2])==2){a[3]=4; circle(335,69,64); continue;}
+     if((a[3]+a[8])==2||(a[7]+a[6])==2){a[9]=4; circle(335,335,64); continue;}
+     if((a[3]+a[4])==2||(a[7]+a[2])==2){a[1]=4; circle(69,69,64); continue;}
+     //проверка на тактический ход3;
+     if(a[2]+a[4]==2){a[1]=4; circle(69,69,64); continue;}
+     if(a[2]+a[6]==2){a[3]=4; circle(335,69,64); continue;}
+     if(a[6]+a[8]==2){a[9]=4; circle(335,335,64); continue;}
+     if(a[4]+a[8]==2){a[7]=4; circle(69,335,64); continue;}
      //другие варианты 
-    if(a[1]==0){
-     a[1]=4;                                                                                     
-     circle(69,69,64);
-     continue;        
-    }
-    if(a[3]==0){
-     a[3]=4;                                                                                                                                                                           
-     circle(335,69,64);
-     continue;        
-    }
-    if(a[7]==0){
-     a[7]=4;                                                                                                                                                                           
-     circle(69,335,64);
-     continue;        
-    }
-    if(a[9]==0){
-     a[9]=4;                                                                                                                                                                         
-     circle(335,335,64);
-     continue;        
-    }       
+    if(a[1]==0){a[1]=4; circle(69,69,64); continue;}
+    if(a[3]==0){a[3]=4; circle(335,69,64); continue;}
+    if(a[7]==0){a[7]=4; circle(69,335,64); continue;}
+    if(a[9]==0){a[9]=4; circle(335,335,64); continue;}       
    }
    //третий и четвёртый ходы;
    if(num==3||num==4){
@@ -2434,8 +2281,7 @@ int main(){
 //старновое меню;
 int smenu,pmenu,flag,check=1;
 menu:
-pmenu=0;
-smenu=0;      
+pscore=0; bscore=0; tscore=0; pmenu=0; smenu=0;      
 if(check==1) initwindow(405,405);           
 flag=1;
 check=0;
@@ -2498,10 +2344,7 @@ if(finmenu()==1){
 closegraph();                                 
 goto play;
 }
-if(finmenu()==2){
-pscore=0;
-bscore=0;
-tscore=0;                  
+if(finmenu()==2){                  
 closegraph();
 initwindow(405,405);
 goto menu;
@@ -2521,10 +2364,7 @@ if(finmenu()==1){
 closegraph();                                 
 goto play_two;
 }
-if(finmenu()==2){
-pscore=0;
-bscore=0;
-tscore=0;                  
+if(finmenu()==2){                
 closegraph();
 initwindow(405,405);
 goto menu;
@@ -2544,10 +2384,7 @@ if(finmenu()==1){
 closegraph();                                 
 goto play_one;
 }
-if(finmenu()==2){
-pscore=0;
-bscore=0;
-tscore=0;                 
+if(finmenu()==2){                
 closegraph();
 initwindow(405,405);
 goto menu;
