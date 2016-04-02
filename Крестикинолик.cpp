@@ -70,16 +70,28 @@ void  cross(int a){
         if(a==9){line(272,272,399,399); line(272,399,399,272); return;}     
 }
 
-//ƒругие варианты хода бота
-void casual_play(){
-     
-     }
+//ƒругие варианты хода
+void casual_play(int* a,int flag){
+int i,x,y;     
+ if(flag=0){    
+  for(i=1;i<=N;i++){
+   if(i==1||i==4||i==7){x=-64; y+=133;}
+   x+=133;                  
+   if(a[i]==0){a[i]=4; circle(x,y,64); return;}                  
+  }
+ }
+ else{
+  for(i=1;i<=N;i++){
+   if(a[i]==0){a[i]=1; cross(i); return;}                  
+  }    
+ }
+}
 
 void bvp(){
      int a[N],i,j,y=-68,x1=-64,y1=-64,prob=0,flag=0,sum,num=1,random,ncheck=0;
-     for(i=1;i<=N;i++)
-     a[i]=0;
+     for(i=1;i<=N;i++) a[i]=0;
     score();
+    setlinestyle(SOLID_LINE,2,THICK_WIDTH);
      while(prob==0){
          setcolor(2);
          //проверка выигрыша крестика;
@@ -254,739 +266,207 @@ void bvp(){
          }           
          }
          if(prob==1) break;
-         //переход на ход игрока;
-         if(flag==1){
-         goto Player;
-         }
          
-        //’од Ѕота;
-        ncheck=0;
-        flag=1;
-        setcolor(14);               
-        outtextxy(420,280,"it's the bot's turn...");          
-        setcolor(12);
-        delay(800);
-        //первый ход бота;
-        if(num==1){
-        random=rand()%9+1;
-        if(random==1){
-        a[1]=1;
-        setlinestyle(SOLID_LINE,2,THICK_WIDTH);                                                                                     
-         line(6,6,133,133);
-         line(133,6,6,133);
-         continue;              
-        }
-        if(random==2){
-        a[2]=1;
-        setlinestyle(SOLID_LINE,2,THICK_WIDTH);                                                                                     
-         line(139,6,266,133);
-         line(266,6,139,133);
-         continue;            
-        }
-        if(random==3){
-        a[3]=1;
-        setlinestyle(SOLID_LINE,2,THICK_WIDTH);                                                                                     
-         line(272,6,399,133);
-         line(399,6,272,133);             
-        continue;
-        }
-        if(random==4){
-        a[4]=1;
-        setlinestyle(SOLID_LINE,2,THICK_WIDTH);                                                                                     
-         line(6,139,133,266);
-         line(133,139,6,266);
-         continue;             
-        }
-        if(random==5){
-        a[5]=1;
-        setlinestyle(SOLID_LINE,2,THICK_WIDTH);                                                                                     
-         line(139,139,266,266);
-         line(266,139,139,266);
-         continue;             
-        }
-        if(random==6){
-        a[6]=1;
-        setlinestyle(SOLID_LINE,2,THICK_WIDTH);                                                                                     
-         line(272,139,399,266);
-         line(399,139,272,266); 
-         continue;            
-        }
-        if(random==7){
-         a[7]=1;
-         setlinestyle(SOLID_LINE,2,THICK_WIDTH);                                                                                     
-         line(6,272,133,399);
-         line(133,272,6,399);
-         continue;             
-        }
-        if(random==8){
-        a[8]=1;
-        setlinestyle(SOLID_LINE,2,THICK_WIDTH);                                                                                     
-         line(139,272,266,399);
-         line(266,272,139,399); 
-         continue;            
-        }
-        if(random==9){
-        a[9]=1;
-        setlinestyle(SOLID_LINE,2,THICK_WIDTH);                                                                                     
-         line(272,272,399,399);
-         line(272,399,399,272);
-         continue;             
-        }           
-        }
+     //переход на ход игрока;
+     if(flag==1) goto Player;
+         
+     //’од Ѕота;
+     ncheck=0; flag=1; setcolor(14); outtextxy(420,280,"it's the bot's turn..."); setcolor(12); delay(800);
         
-        //второй ход бота;
-        if(num==2){
+     //первый ход бота;
+     if(num==1){
+         random=rand()%9+1;
+         if(random==1){a[1]=1; cross(1); continue;}
+         if(random==2){a[2]=1; cross(2); continue;}
+         if(random==3){a[3]=1; cross(3); continue;}
+         if(random==4){a[4]=1; cross(4); continue;}
+         if(random==5){a[5]=1; cross(5); continue;}
+         if(random==6){a[6]=1; cross(6); continue;}
+         if(random==7){a[7]=1; cross(7); continue;}
+         if(random==8){a[8]=1; cross(8); continue;}
+         if(random==9){a[9]=1; cross(9); continue;}           
+     }
+        
+     //второй ход бота;
+     if(num==2){
         //тактика 1;
+        if((a[2]+a[6]+a[4]+a[8])==4){
+         if(a[5]==0){a[5]=1; cross(5); continue;}                           
+         random=rand()%4+1;
+         if(random==1){a[1]=1; cross(1); continue;}
+         if(random==2){a[3]=1; cross(3); continue;}
+         if(random==3){a[7]=1; cross(7); continue;}
+         if(random==4){a[9]=1; cross(9); continue;}                             
+        }           
+        //тактика 2;
         if(a[8]==1){
-        if(a[1]==0){
-         a[1]=1;          
-         line(6,6,133,133);
-         line(133,6,6,133);
-         continue;            
-        }
-        if(a[6]==0){
-         a[6]=1;           
-         line(272,139,399,266);
-         line(399,139,272,266);
-         continue;                                   
-        }
+         if(a[1]==0&&a[4]==0&&a[7]==0){a[1]=1; cross(1); continue;}
+         else{a[3]=1; cross(3); continue;}
         }
         if(a[4]==1){
-        if(a[3]==0){
-         a[3]=1;
-         line(272,6,399,133);
-         line(399,6,272,133); 
-         continue;            
-        }
-        if(a[8]==0){         
-         a[8]=1;                                                                                   
-         line(139,272,266,399);
-         line(266,272,139,399); 
-         continue;     
-        }            
+         if(a[3]==0&&a[1]==0&&a[2]==0){a[3]=1; cross(3); continue;}
+         else{a[9]=1; cross(9); continue;}            
         }
         if(a[2]==1){          
-        if(a[7]==0){
-         a[7]=1;                                                                                     
-         line(6,272,133,399);
-         line(133,272,6,399);
-         continue;     
-        }
-        if(a[6]==0){
-         a[6]=1;           
-         line(272,139,399,266);
-         line(399,139,272,266);
-         continue;     
-        }    
+         if(a[7]==0&&a[1]==0&&a[4]==0){a[7]=1; cross(7); continue;}
+         else{a[9]=1; cross(9); continue;}    
         }
         if(a[6]==1){
-        if(a[1]==0){
-         a[1]=1;          
-         line(6,6,133,133);
-         line(133,6,6,133);
-         continue;     
-        }
-        if(a[8]==0){
-         a[8]=1;                                                                                   
-         line(139,272,266,399);
-         line(266,272,139,399); 
-         continue;           
-        }     
+        if(a[1]==0&&a[4]==0&&a[7]==0){a[1]=1; cross(1); continue;}
+        else {a[7]=1; cross(7); continue;}     
         }
         
-        //тактика 2;
+        //тактика 3;
         if(a[1]==1||a[9]==1){
-        if(a[1]==0){
-         a[1]=1;           
-         line(6,6,133,133);
-         line(133,6,6,133);
-         continue;     
-        }
-        if(a[9]==0){
-         a[9]=1;                                                                                     
-         line(272,272,399,399);
-         line(272,399,399,272);
-         continue;      
-        }
-        if(a[3]==0){
-         a[3]=1;           
-         line(272,6,399,133);
-         line(399,6,272,133); 
-         continue;     
-        }                    
+         if(a[1]==0){a[1]=1; cross(1); continue;}
+         if(a[9]==0){a[9]=1; cross(9); continue;}
+         else{a[3]=1; cross(3); continue;}                    
         }
         if(a[3]==1||a[7]==1){
-        if(a[3]==0){
-         a[3]=1;           
-         line(272,6,399,133);
-         line(399,6,272,133); 
-         continue;     
+         if(a[3]==0){a[3]=1; cross(3); continue;}
+         if(a[7]==0){a[7]=1; cross(7); continue;}
+         else{a[1]=1; cross(1); continue;}          
         }
-        if(a[7]==0){
-         a[7]=1;                                                                                     
-         line(6,272,133,399);
-         line(133,272,6,399);
-         continue;      
-        }
-        if(a[1]==0){
-         a[1]=1;           
-         line(6,6,133,133);
-         line(133,6,6,133);
-         continue;     
-        }          
-        }
-        //тактика 3;
-        if((a[2]+a[6]+a[4]+a[8])==4){
-        random=rand()%4+1;
-        if(random==1){
-        a[1]=1;           
-         line(6,6,133,133);
-         line(133,6,6,133);
-         continue;     
-        }
-        if(random==2){
-         a[3]=1;           
-         line(272,6,399,133);
-         line(399,6,272,133); 
-         continue;              
-        }
-        if(random==3){
-        a[7]=1;                                                                                     
-        line(6,272,133,399);
-        line(133,272,6,399);
-         continue;              
-        }
-        if(random==4){
-         a[9]=1;                                                                                     
-         line(272,272,399,399);
-         line(272,399,399,272);
-         continue;              
-        }                             
-        }
-        if(a[1]==0){
-        a[1]=1;
-        setlinestyle(SOLID_LINE,2,THICK_WIDTH);                                                                                     
-         line(6,6,133,133);
-         line(133,6,6,133);
-         continue;              
-        }
-        if(a[2]==0){
-        a[2]=1;
-        setlinestyle(SOLID_LINE,2,THICK_WIDTH);                                                                                     
-         line(139,6,266,133);
-         line(266,6,139,133);
-         continue;            
-        }
-        if(a[3]==0){
-        a[3]=1;
-        setlinestyle(SOLID_LINE,2,THICK_WIDTH);                                                                                     
-         line(272,6,399,133);
-         line(399,6,272,133);             
-        continue;
-        }
-        if(a[4]==0){
-        a[4]=1;
-        setlinestyle(SOLID_LINE,2,THICK_WIDTH);                                                                                     
-         line(6,139,133,266);
-         line(133,139,6,266);
-         continue;             
-        }
-        if(a[5]==0){
-        a[5]=1;
-        setlinestyle(SOLID_LINE,2,THICK_WIDTH);                                                                                     
-         line(139,139,266,266);
-         line(266,139,139,266);
-         continue;             
-        }
-        if(a[6]==0){
-        a[6]=1;
-        setlinestyle(SOLID_LINE,2,THICK_WIDTH);                                                                                     
-         line(272,139,399,266);
-         line(399,139,272,266); 
-         continue;            
-        }
-        if(a[7]==0){
-         a[7]=1;
-         setlinestyle(SOLID_LINE,2,THICK_WIDTH);                                                                                     
-         line(6,272,133,399);
-         line(133,272,6,399); 
-         continue;             
-        }
-        if(a[8]==0){
-        a[8]=1;
-        setlinestyle(SOLID_LINE,2,THICK_WIDTH);                                                                                     
-         line(139,272,266,399);
-         line(266,272,139,399); 
-         continue;            
-        }
-        if(a[9]==0){
-        a[9]=1;
-        setlinestyle(SOLID_LINE,2,THICK_WIDTH);                                                                                     
-         line(272,272,399,399);
-         line(272,399,399,272);
-         continue;             
-        } 
-        }
+        //ƒругие варианты;
+        casual_play(a,1); 
+     }
      
-        //третий ход бота;
-        if(num==3||num==4||num==5){                        
+     //третий ход бота;
+     if(num==3||num==4||num==5){                        
           //проверка парных крестиков в строке;                   
-          for(j=0;j<7;j+=3){     
+        for(j=0;j<7;j+=3){     
          if((a[j+1]+a[j+2]+a[j+3])==2){
-         if(j==0){
-         if(a[j+1]==0){
-         a[1]=1;                                                                                     
-         line(6,6,133,133);
-         line(133,6,6,133);
-         ncheck=1;
-         continue;
-         }        
-        if(a[j+2]==0){
-         a[2]=1;                                                                                                                                                                          
-         line(139,6,266,133);
-         line(266,6,139,133);
-         ncheck=1;
-         continue;             
+          if(j==0){
+           if(a[j+1]==0){a[1]=1; cross(1); ncheck=1; break;}        
+           if(a[j+2]==0){a[2]=1; cross(2); ncheck=1; break;}
+           if(a[j+3]==0){a[3]=1; cross(3); ncheck=1; break;}
+          }
+          if(j==3){
+           if(a[j+1]==0){a[4]=1; cross(4); ncheck=1; break;}
+           if(a[j+2]==0){a[5]=1; cross(5); ncheck=1; break;}
+           if(a[j+3]==0){a[6]=1; cross(6); ncheck=1; break;}         
+          }
+          if(j==6){
+           if(a[j+1]==0){a[7]=1; cross(7); ncheck=1; break;}
+           if(a[j+2]==0){a[8]=1; cross(8); ncheck=1; break;}
+           if(a[j+3]==0){a[9]=1; cross(9); ncheck=1; break;}         
+          }                              
+         }                              
         }
-        if(a[j+3]==0){
-        a[3]=1;                                                                                                                                                                           
-         line(272,6,399,133);
-         line(399,6,272,133); 
-         ncheck=1;
-         continue;
-        }
-        }
-        if(j==3){
-        if(a[j+1]==0){
-         a[4]=1;                                                                                                                                                                          
-         line(6,139,133,266);
-         line(133,139,6,266);
-         ncheck=1;
-         continue;
-        }
-        if(a[j+2]==0){
-         a[5]=1;                                                                                                                                                                         
-         line(139,139,266,266);
-         line(266,139,139,266);
-         ncheck=1;
-         continue;             
-        }
-        if(a[j+3]==0){
-         a[6]=1;                                                                                                                                                                         
-         line(272,139,399,266);
-         line(399,139,272,266); 
-         ncheck=1;
-         continue;             
-        }         
-        }
-        if(j==6){
-        if(a[j+1]==0){
-        a[7]=1;                                                                                                                                                                           
-        line(6,272,133,399);
-        line(133,272,6,399);
-        ncheck=1;
-        continue;             
-        }
-        if(a[j+2]==0){
-        a[8]=1;                                                                                                                                                                          
-        line(139,272,266,399);
-        line(266,272,139,399);
-        ncheck=1;
-        continue;             
-        }
-        if(a[j+3]==0){
-         a[9]=1;                                                                                                                                                                         
-         line(272,272,399,399);
-         line(272,399,399,272);
-         ncheck=1;
-         continue;              
-        }         
-        }                              
-       }                              
-      }
-      if(ncheck==1)continue;
+        if(ncheck==1)continue;
+        
       //проверка парных кресников в столбце;
-      for(j=0;j<3;j++){
+        for(j=0;j<3;j++){
          if((a[j+1]+a[j+4]+a[j+7])==2){
-       if(j==0){
-       if(a[j+1]==0){
-       a[1]=1;                                                                                     
-       line(6,6,133,133);
-       line(133,6,6,133);
-       ncheck=1;
-       continue;             
-       }
-       if(a[j+4]==0){
-       a[4]=1;                                                                                                                                                                          
-       line(6,139,133,266);
-       line(133,139,6,266);
-       ncheck=1;
-       continue;             
-       }
-       if(a[j+7]==0){
-       a[7]=1;                                                                                                                                                                           
-       line(6,272,133,399);
-       line(133,272,6,399);
-       ncheck=1;
-       continue;             
-       }         
-       }
-       if(j==1){
-       if(a[j+1]==0){
-       a[2]=1;                                                                                                                                                                          
-       line(139,6,266,133);
-       line(266,6,139,133);
-       ncheck=1;
-       continue;             
-       }
-       if(a[j+4]==0){
-       a[5]=1;                                                                                                                                                                          
-       line(139,139,266,266);
-       line(266,139,139,266);
-       ncheck=1;
-       continue;             
-       }
-       if(a[j+7]==0){
-       a[8]=1;                                                                                                                                                                          
-       line(139,272,266,399);
-       line(266,272,139,399);
-       ncheck=1;
-       continue;             
-       }          
-       }
-       if(j==2){
-       if(a[j+1]==0){
-       a[3]=1;                                                                                                                                                                           
-       line(272,6,399,133);
-       line(399,6,272,133);
-       ncheck=1;
-       continue;     
-       }
-       if(a[j+4]==0){
-       a[6]=1;                                                                                                                                                                         
-       line(272,139,399,266);
-       line(399,139,272,266);
-       ncheck=1;
-       continue;              
-       }
-       if(a[j+7]==0){
-       a[9]=1;                                                                                                                                                                         
-       line(272,272,399,399);
-       line(272,399,399,272);
-       ncheck=1;
-       continue;              
-       }         
-       }                                
-      }           
-     }
-     if(ncheck==1)continue;
-     //проверка парных крестиков по диагонали;
-     if((a[1]+a[5]+a[9])==2){
-      if(a[1]==0){
-      a[1]=1;                                                                                     
-      line(6,6,133,133);
-      line(133,6,6,133);
-      continue;           
-      }
-      if(a[9]==0){
-      a[9]=1;                                                                                                                                                                         
-      line(272,272,399,399);
-      line(272,399,399,272);
-      continue;            
-      }
-      if(a[5]==0){
-      a[5]=1;                                                                                                                                                                         
-      line(139,139,266,266);
-      line(266,139,139,266);
-      continue;            
-      }                        
-     }
-      if((a[3]+a[5]+a[7])==2){
-      if(a[3]==0){
-      a[3]=1;                                                                                                                                                                           
-      line(272,6,399,133);
-      line(399,6,272,133);
-      continue;            
-      }
-      if(a[5]==0){
-      a[5]=1;                                                                                                                                                                         
-      line(139,139,266,266);
-      line(266,139,139,266);
-      continue;            
-      }
-      if(a[7]==0){
-      a[7]=1;                                                                                                                                                                           
-      line(6,272,133,399);
-      line(133,272,6,399);
-      continue;            
-      }                        
-     }
-       //проверка парных ноликов в строке;                   
-          for(j=0;j<7;j+=3){     
+          if(j==0){
+           if(a[j+1]==0){a[1]=1; cross(1); ncheck=1; break;}
+           if(a[j+4]==0){a[4]=1; cross(4); ncheck=1; break;}
+           if(a[j+7]==0){a[7]=1; cross(7); ncheck=1; break;}         
+          }
+          if(j==1){
+           if(a[j+1]==0){a[2]=1; cross(2); ncheck=1; break;}
+           if(a[j+4]==0){a[5]=1; cross(5); ncheck=1; break;}
+           if(a[j+7]==0){a[8]=1; cross(8); ncheck=1; break;}          
+          }
+          if(j==2){
+           if(a[j+1]==0){a[3]=1; cross(3); ncheck=1; break;}
+           if(a[j+4]==0){a[6]=1; cross(6); ncheck=1; break;}
+           if(a[j+7]==0){a[9]=1; cross(9); ncheck=1; break;}         
+          }                                
+         }           
+        }
+        if(ncheck==1)continue;
+        
+        //проверка парных крестиков по диагонали;
+        if((a[1]+a[5]+a[9])==2){
+          if(a[1]==0){a[1]=1; cross(1); continue;}
+          if(a[9]==0){a[9]=1; cross(9); continue;}
+          if(a[5]==0){a[5]=1; cross(5); continue;}                        
+        }
+        if((a[3]+a[5]+a[7])==2){
+         if(a[3]==0){a[3]=1; cross(3); continue;}
+         if(a[5]==0){a[5]=1; cross(5); continue;}
+         if(a[7]==0){a[7]=1; cross(7); continue;}                        
+        }
+        
+        //проверка парных ноликов в строке;                   
+        for(j=0;j<7;j+=3){     
          if((a[j+1]+a[j+2]+a[j+3])==8){
-         if(j==0){
-         if(a[j+1]==0){
-         a[1]=1;                                                                                     
-         line(6,6,133,133);
-         line(133,6,6,133);
-         ncheck=1;
-         continue;
-         }        
-        if(a[j+2]==0){
-         a[2]=1;                                                                                                                                                                          
-         line(139,6,266,133);
-         line(266,6,139,133);
-         ncheck=1;
-         continue;             
+          if(j==0){
+           if(a[j+1]==0){a[1]=1; cross(1); ncheck=1; break;}        
+           if(a[j+2]==0){a[2]=1; cross(2); ncheck=1; break;}
+           if(a[j+3]==0){a[3]=1; cross(3); ncheck=1; break;}
+          }
+          if(j==3){
+           if(a[j+1]==0){a[4]=1; cross(4); ncheck=1; break;}
+           if(a[j+2]==0){a[5]=1; cross(5); ncheck=1; break;}
+           if(a[j+3]==0){a[6]=1; cross(6); ncheck=1; break;}         
+          }
+          if(j==6){
+           if(a[j+1]==0){a[7]=1; cross(7); ncheck=1; break;}
+           if(a[j+2]==0){a[8]=1; cross(8); ncheck=1; break;}
+           if(a[j+3]==0){a[9]=1; cross(9); ncheck=1; break;}         
+          }                              
+         }                              
         }
-        if(a[j+3]==0){
-        a[3]=1;                                                                                                                                                                           
-        line(272,6,399,133);
-        line(399,6,272,133);
-         ncheck=1;
-         continue;
-        }
-        }
-        if(j==3){
-        if(a[j+1]==0){
-         a[4]=1;                                                                                                                                                                          
-         line(6,139,133,266);
-         line(133,139,6,266);
-         ncheck=1;
-         continue;
-        }
-        if(a[j+2]==0){
-         a[5]=1;
-         line(139,139,266,266);
-         line(266,139,139,266);
-         ncheck=1;
-         continue;    
-        }
-        if(a[j+3]==0){
-         a[6]=1;                                                                                                                                                                         
-         line(272,139,399,266);
-         line(399,139,272,266);
-         ncheck=1;
-         continue;             
-        }         
-        }
-        if(j==6){
-        if(a[j+1]==0){
-        a[7]=1;                                                                                                                                                                           
-        line(6,272,133,399);
-        line(133,272,6,399);
-        ncheck=1;
-        continue;             
-        }
-        if(a[j+2]==0){
-        a[8]=1;                                                                                                                                                                          
-        line(139,272,266,399);
-        line(266,272,139,399);
-        ncheck=1;
-        continue;             
-        }
-        if(a[j+3]==0){
-        a[9]=1;                                                                                                                                                                         
-        line(272,272,399,399);
-        line(272,399,399,272);
-        ncheck=1;
-        continue;              
-        }         
-        }                              
-       }                              
-      }
-      if(ncheck==1)continue;
-      //проверка парных ноликов в столбце;
-      for(j=0;j<3;j++){
-       if((a[j+1]+a[j+4]+a[j+7])==8){
-       if(j==0){
-       if(a[j+1]==0){
-       a[1]=1;                                                                                     
-       line(6,6,133,133);
-       line(133,6,6,133);
-       ncheck=1;
-       continue;             
-       }
-       if(a[j+4]==0){
-       a[4]=1;                                                                                                                                                                          
-       line(6,139,133,266);
-       line(133,139,6,266);
-       ncheck=1;
-       continue;             
-       }
-       if(a[j+7]==0){
-       a[7]=1;                                                                                                                                                                           
-       line(6,272,133,399);
-       line(133,272,6,399);
-       ncheck=1;
-       continue;             
-       }         
-       }
-       if(j==1){
-       if(a[j+1]==0){
-       a[2]=1;                                                                                                                                                                          
-       line(139,6,266,133);
-       line(266,6,139,133);
-       ncheck=1;
-       continue;             
-       }
-       if(a[j+4]==0){
-       a[5]=1;
-       line(139,139,266,266);
-       line(266,139,139,266);
-       ncheck=1;
-       continue;              
-       }
-       if(a[j+7]==0){
-       a[8]=1;                                                                                                                                                                          
-       line(139,272,266,399);
-       line(266,272,139,399);
-       ncheck=1;
-       continue;             
-       }         
-       }
-       if(j==2){
-       if(a[j+1]==0){
-       a[3]=1;                                                                                                                                                                           
-       line(272,6,399,133);
-       line(399,6,272,133);
-       ncheck=1;
-       continue;     
-       }
-       if(a[j+4]==0){
-       a[6]=1;                                                                                                                                                                         
-       line(272,139,399,266);
-       line(399,139,272,266); 
-       ncheck=1;
-       continue;              
-       }
-       if(a[j+7]==0){
-       a[9]=1;                                                                                                                                                                         
-       line(272,272,399,399);
-       line(272,399,399,272);
-       ncheck=1;
-       continue;              
-       }         
-       }                                
-      }           
-     }
-     if(ncheck==1)continue;
-     //проверка парных ноликов по диагонали;
-     if((a[1]+a[5]+a[9])==8){
-      if(a[1]==0){
-      a[1]=1;                                                                                     
-      line(6,6,133,133);
-      line(133,6,6,133);
-      continue;           
-      }
-      if(a[5]==0){
-      a[5]=1;                                                                                                                                                                         
-      line(139,139,266,266);
-      line(266,139,139,266);
-      continue;
-      }
-      if(a[9]==0){
-      a[9]=1;                                                                                                                                                                         
-      line(272,272,399,399);
-      line(272,399,399,272);
-      continue;            
-      }                        
-     }
-      if((a[3]+a[5]+a[7])==8){
-      if(a[3]==0){
-      a[3]=1;                                                                                                                                                                           
-      line(272,6,399,133);
-      line(399,6,272,133);
-      continue;            
-      }
-      if(a[5]==0){
-      a[5]=1;                                                                                                                                                                         
-      line(139,139,266,266);
-      line(266,139,139,266);
-      continue;
-      }
-      if(a[7]==0){
-      a[7]=1;                                                                                                                                                                           
-      line(6,272,133,399);
-      line(133,272,6,399);
-      continue;            
-      }                        
-     }
+        if(ncheck==1)continue;
       
-     //другие варианты;
-     if(a[1]==0){
-        a[1]=1;
-        setlinestyle(SOLID_LINE,2,THICK_WIDTH);                                                                                     
-         line(6,6,133,133);
-         line(133,6,6,133);
-         continue;              
+        //проверка парных ноликов в столбце;
+        for(j=0;j<3;j++){
+         if((a[j+1]+a[j+4]+a[j+7])==8){
+          if(j==0){
+           if(a[j+1]==0){a[1]=1; cross(1); ncheck=1; break;}
+           if(a[j+4]==0){a[4]=1; cross(4); ncheck=1; break;}
+           if(a[j+7]==0){a[7]=1; cross(7); ncheck=1; break;}         
+          }
+          if(j==1){
+           if(a[j+1]==0){a[2]=1; cross(2); ncheck=1; break;}
+           if(a[j+4]==0){a[5]=1; cross(5); ncheck=1; break;}
+           if(a[j+7]==0){a[8]=1; cross(8); ncheck=1; break;}         
+          }
+          if(j==2){
+           if(a[j+1]==0){a[3]=1; cross(3); ncheck=1; break;}
+           if(a[j+4]==0){a[6]=1; cross(6); ncheck=1; break;}
+           if(a[j+7]==0){a[9]=1; cross(9); ncheck=1; break;}         
+          }                                
+         }           
         }
-        if(a[2]==0){
-        a[2]=1;
-        setlinestyle(SOLID_LINE,2,THICK_WIDTH);                                                                                     
-         line(139,6,266,133);
-         line(266,6,139,133);
-         continue;            
+        if(ncheck==1)continue;
+        
+        //проверка парных ноликов по диагонали;
+        if((a[1]+a[5]+a[9])==8){
+          if(a[1]==0){a[1]=1; cross(1); continue;}
+          if(a[5]==0){a[5]=1; cross(5); continue;}
+          if(a[9]==0){a[9]=1; cross(9); continue;}                        
         }
-        if(a[3]==0){
-        a[3]=1;
-        setlinestyle(SOLID_LINE,2,THICK_WIDTH);                                                                                     
-         line(272,6,399,133);
-         line(399,6,272,133);             
-        continue;
-        }
-        if(a[4]==0){
-        a[4]=1;
-        setlinestyle(SOLID_LINE,2,THICK_WIDTH);                                                                                     
-         line(6,139,133,266);
-         line(133,139,6,266);
-         continue;             
-        }
-        if(a[5]==0){
-        a[5]=1;
-        setlinestyle(SOLID_LINE,2,THICK_WIDTH);                                                                                     
-         line(139,139,266,266);
-         line(266,139,139,266);
-         continue;             
-        }
-        if(a[6]==0){
-        a[6]=1;
-        setlinestyle(SOLID_LINE,2,THICK_WIDTH);                                                                                     
-         line(272,139,399,266);
-         line(399,139,272,266); 
-         continue;            
-        }
-        if(a[7]==0){
-         a[7]=1;
-         setlinestyle(SOLID_LINE,2,THICK_WIDTH);                                                                                     
-         line(6,272,133,399);
-         line(133,272,6,399); 
-         continue;             
-        }
-        if(a[8]==0){
-        a[8]=1;
-        setlinestyle(SOLID_LINE,2,THICK_WIDTH);                                                                                     
-         line(139,272,266,399);
-         line(266,272,139,399); 
-         continue;            
-        }
-        if(a[9]==0){
-        a[9]=1;
-        setlinestyle(SOLID_LINE,2,THICK_WIDTH);                                                                                     
-         line(272,272,399,399);
-         line(272,399,399,272);
-         continue;             
-        }   
-        }
-        continue;
-         
+        if((a[3]+a[5]+a[7])==8){
+         if(a[3]==0){a[3]=1; cross(3); continue;}
+         if(a[5]==0){a[5]=1; cross(5); continue;}
+         if(a[7]==0){a[7]=1; cross(7); continue;}                        
+       }
+       //“актика 2;
+       if(a[8]+a[1]+a[4]+a[7]==2){a[7]=1; cross(7); continue;}
+       if(a[8]+a[3]+a[6]+a[9]==2){a[9]=1; cross(9); continue;}
+       if(a[2]+a[7]+a[4]+a[1]==2){a[1]=1; cross(1); continue;}
+       if(a[2]+a[9]+a[6]+a[3]==2){a[3]=1; cross(3); continue;}
+       if(a[6]+a[1]+a[2]+a[3]==2){a[3]=1; cross(3); continue;}
+       if(a[6]+a[7]+a[8]+a[9]==2){a[9]=1; cross(9); continue;}
+       if(a[4]+a[3]+a[2]+a[1]==2){a[1]=1; cross(1); continue;}
+       if(a[4]+a[9]+a[8]+a[7]==2){a[7]=1; cross(7); continue;}
+       
+       //другие варианты;
+       if(a[5]==0){a[5]=1; cross(5); continue;}
+       casual_play(a,1);   
+     }
+     continue;
+        
+        //ход игрока;
         Player:
          setfillstyle(1,15);
          bar(406,275,705,330);
          setcolor(14);               
          outtextxy(440,280,"it's a your turn...");
-         setcolor(9);      
-        //ход игрока;
+         setcolor(9);
          if(ismouseclick(WM_LBUTTONDOWN)) 
          clearmouseclick(WM_LBUTTONDOWN);
          delay(30);
@@ -1078,280 +558,132 @@ void bvp(){
 //игрок против бота;
 void pvb(){
     int a[N],i,j,y=-68,x1=-64,y1=-64,prob=0,flag=0,sum,num=0,random,ncheck=0;
-    for(i=1;i<=N;i++)
-    a[i]=0;
+    for(i=1;i<=N;i++) a[i]=0;
     score();
     setlinestyle(SOLID_LINE,2,THICK_WIDTH); 
      while(prob==0){           
          setcolor(2);
          //проверка выигрыша крестика;
          if(prob==0){
-         for(j=0;j<7;j+=3){     
-         if((a[j+1]+a[j+2]+a[j+3])==3){
-         if(j==3) y+=135;
-         if(j==6) y+=270;                                 
-         setlinestyle(1,1,5);         
-         for(i=7;i<378;i+=7){
-         delay(10);
-         line(i,y+136,i+25,y+136);
-         }
-         pscore+=1;
-         bgiout <<pscore;
-         outstreamxy(600,130); 
-         setfillstyle(1,15);
-         bar(406,275,705,330);                       
-         moveto(465,280);
-         outtext("Player One WIN!");
-         prob=1;
-         }
-         }
+          for(j=0;j<7;j+=3){     
+           if((a[j+1]+a[j+2]+a[j+3])==3){
+            if(j==3) y+=135; if(j==6) y+=270;                                 
+            setlinestyle(1,1,5);         
+            for(i=7;i<378;i+=7){delay(10); line(i,y+136,i+25,y+136);}
+            pscore+=1; bgiout <<pscore; outstreamxy(600,130); setfillstyle(1,15);
+            bar(406,275,705,330); moveto(465,280); outtext("Player One WIN!"); prob=1;
+           }
+          }
          }
          if(prob==1) break;
+         
          if(prob==0){
-         for(j=0;j<3;j++){
-         if((a[j+1]+a[j+4]+a[j+7])==3){
-         if(j==1) y+=135;
-         if(j==2) y+=270;
-         setlinestyle(1,1,5);         
-         for(i=7;i<378;i+=7){
-         delay(10);
-         line(y+136,i,y+136,i+25);
-         }
-         pscore+=1;
-         bgiout <<pscore;
-         outstreamxy(600,130);
-         setfillstyle(1,15);
-         bar(406,275,705,330);
-         moveto(465,280);
-         outtext("Player One WIN!");
-         prob=1;                           
-         }
-         }
+          for(j=0;j<3;j++){
+           if((a[j+1]+a[j+4]+a[j+7])==3){
+            if(j==1) y+=135; if(j==2) y+=270;
+            setlinestyle(1,1,5);         
+            for(i=7;i<378;i+=7){delay(10); line(y+136,i,y+136,i+25);}
+            pscore+=1; bgiout <<pscore; outstreamxy(600,130); setfillstyle(1,15);
+            bar(406,275,705,330); moveto(465,280); outtext("Player One WIN!"); prob=1;                           
+           }
+          }
          }
          if(prob==1) break;
+         
          if(prob==0&&(a[1]+a[5]+a[9]==3)){ 
          setlinestyle(1,1,5);
-         for(i=7;i<378;i+=7){
-         delay(10);
-         line(i,i,i+25,i+25);
-         }
-         pscore+=1;
-         bgiout <<pscore;
-         outstreamxy(600,130);
-         setfillstyle(1,15);
-         bar(406,275,705,330);
-         moveto(465,280);
-         outtext("Player One WIN!");
-         prob=1;                                           
+         for(i=7;i<378;i+=7){delay(10); line(i,i,i+25,i+25);}
+         pscore+=1; bgiout <<pscore; outstreamxy(600,130); setfillstyle(1,15);
+         bar(406,275,705,330); moveto(465,280); outtext("Player One WIN!"); prob=1;                                           
          }
          if(prob==1) break;
          if(prob==0&&(a[3]+a[5]+a[7]==3)){ 
-         setlinestyle(1,1,5);
-         for(i=398,j=7;i>30;i-=7,j+=7){
-         delay(10);
-         line(i,j,i-25,j+25);
-         }
-         pscore+=1;
-         bgiout <<pscore;
-         outstreamxy(600,130);
-         setfillstyle(1,15);
-         bar(406,275,705,330);
-         moveto(465,280);
-         outtext("Player One WIN!");
-         prob=1;                                           
+          setlinestyle(1,1,5);
+          for(i=398,j=7;i>30;i-=7,j+=7){delay(10); line(i,j,i-25,j+25);}
+          pscore+=1; bgiout <<pscore; outstreamxy(600,130); setfillstyle(1,15);
+          bar(406,275,705,330); moveto(465,280); outtext("Player One WIN!"); prob=1;
          }
          if(prob==1) break;
+         
          //проверка выигрыша нолика;
          if(prob==0){
-         for(j=0;j<7;j+=3){     
-         if((a[j+1]+a[j+2]+a[j+3])==12){
-         if(j==3) y+=135;
-         if(j==6) y+=270;                                 
-         setlinestyle(1,1,5);         
-         for(i=7;i<378;i+=7){
-         delay(10);
-         line(i,y+136,i+25,y+136);
-         }
-         bscore+=1;
-         bgiout <<bscore;
-         outstreamxy(605,180);
-         setfillstyle(1,15);
-         bar(406,275,705,330);                        
-         moveto(495,280);
-         outtext("Bot WIN!");
-         prob=1;
-         }
-         }
+          for(j=0;j<7;j+=3){     
+           if((a[j+1]+a[j+2]+a[j+3])==12){
+            if(j==3) y+=135; if(j==6) y+=270;                                 
+            setlinestyle(1,1,5);         
+            for(i=7;i<378;i+=7){delay(10); line(i,y+136,i+25,y+136);}
+            bscore+=1; bgiout <<bscore; outstreamxy(605,180); setfillstyle(1,15);
+            bar(406,275,705,330); moveto(495,280); outtext("Bot WIN!"); prob=1;
+           }
+          }
          }
          if(prob==1) break;
-         if(prob==0){
-         for(j=0;j<3;j++){
-         if((a[j+1]+a[j+4]+a[j+7])==12){
-         if(j==1) y+=135;
-         if(j==2) y+=270;
-         setlinestyle(1,1,5);         
-         for(i=7;i<378;i+=7){
-         delay(10);
-         line(y+136,i,y+136,i+25);
-         }
-         bscore+=1;
-         bgiout <<bscore;
-         outstreamxy(605,180);
-         setfillstyle(1,15);
-         bar(406,275,705,330);
-         moveto(495,280);
-         outtext("Bot WIN!");
-         prob=1;                           
-         }
-         }
-         }
-         if(prob==1) break;
+         
+          if(prob==0){
+           for(j=0;j<3;j++){
+            if((a[j+1]+a[j+4]+a[j+7])==12){
+             if(j==1) y+=135; if(j==2) y+=270;
+             setlinestyle(1,1,5);         
+             for(i=7;i<378;i+=7){delay(10); line(y+136,i,y+136,i+25);}
+             bscore+=1; bgiout <<bscore; outstreamxy(605,180);setfillstyle(1,15);
+             bar(406,275,705,330); moveto(495,280); outtext("Bot WIN!"); prob=1;                           
+            }
+           }
+          }
+          if(prob==1) break;
+          
          if(prob==0&&(a[1]+a[5]+a[9]==12)){ 
-         setlinestyle(1,1,5);
-         for(i=7;i<378;i+=7){
-         delay(10);
-         line(i,i,i+25,i+25);
-         }
-         bscore+=1;
-         bgiout <<bscore;
-         outstreamxy(605,180);
-         setfillstyle(1,15);
-         bar(406,275,705,330);
-         moveto(495,280);
-         outtext("Bot WIN!");
-         prob=1;                                           
+          setlinestyle(1,1,5);
+          for(i=7;i<378;i+=7){delay(10); line(i,i,i+25,i+25);}
+          bscore+=1; bgiout <<bscore; outstreamxy(605,180); setfillstyle(1,15);
+          bar(406,275,705,330); moveto(495,280); outtext("Bot WIN!"); prob=1;                                           
          }
          if(prob==1) break;
+         
          if(prob==0&&(a[3]+a[5]+a[7]==12)){ 
-         setlinestyle(1,1,5);
-         for(i=398,j=7;i>30;i-=7,j+=7){
-         delay(10);
-         line(i,j,i-25,j+25);
-         }
-         bscore+=1;
-         bgiout <<bscore;
-         outstreamxy(605,180);
-         setfillstyle(1,15);
-         bar(406,275,705,330);
-         moveto(495,280);
-         outtext("Bot WIN!");
-         prob=1;                                           
+          setlinestyle(1,1,5);
+          for(i=398,j=7;i>30;i-=7,j+=7){delay(10); line(i,j,i-25,j+25);}
+          bscore+=1; bgiout <<bscore; outstreamxy(605,180); setfillstyle(1,15);
+          bar(406,275,705,330); moveto(495,280); outtext("Bot WIN!"); prob=1;                                           
          }
          if(prob==1) break;
-         setcolor(12);
+         
          //проверка ничьи;
-         if(prob==0){
-         sum=0;            
-         for(i=1;i<10;i++)
-          sum+=a[i];
-         if(sum==21){
-         tscore+=1;
-         bgiout <<tscore;
-         outstreamxy(615,230);            
-         setfillstyle(1,15);
-         bar(406,275,705,330);            
-         moveto(465,280);
-         outtext("Nobody has won");
-         prob=1;
-         }           
+         setcolor(12);
+         if(prob==0){ 
+          sum=0;            
+          for(i=1;i<10;i++) sum+=a[i];
+           if(sum==21){ tscore+=1; bgiout <<tscore; outstreamxy(615,230); 
+            setfillstyle(1,15); bar(406,275,705,330); moveto(465,280); outtext("Nobody has won");  prob=1;
+           }           
          }
          if(prob==1) break;
+         
          //переход на ход бота;
-         if(flag==1){
-         goto bot;
-         }
-         setfillstyle(1,15);
-         bar(406,275,705,330);
-         setcolor(14);               
-         outtextxy(440,280,"it's a your turn...");
-         setcolor(12);
+         if(flag==1) goto bot;
+         
          //ход игрока;
-         if(ismouseclick(WM_LBUTTONDOWN)) 
-         clearmouseclick(WM_LBUTTONDOWN);
-         delay(30);
+         setfillstyle(1,15); bar(406,275,705,330);
+         setcolor(14); outtextxy(440,280,"it's a your turn..."); setcolor(12);
+         if(ismouseclick(WM_LBUTTONDOWN)) clearmouseclick(WM_LBUTTONDOWN); delay(30);
          if(a[1]==0&&ismouseclick(WM_LBUTTONDOWN)&&mousex()>6&&mousex()<133&&mousey()>6&&mousey()<133){
-         clearmouseclick(WM_LBUTTONDOWN);
-         num+=1;
-         flag=1;
-         a[1]=1;
-         setlinestyle(SOLID_LINE,2,THICK_WIDTH);                                                                                     
-         line(6,6,133,133);
-         line(133,6,6,133);
-         continue;
-         }
+         clearmouseclick(WM_LBUTTONDOWN); num+=1; flag=1; a[1]=1; cross(1); continue;}
          if(a[2]==0&&ismouseclick(WM_LBUTTONDOWN)&&mousex()>139&&mousex()<266&&mousey()>6&&mousey()<133){
-         clearmouseclick(WM_LBUTTONDOWN);
-         num+=1;
-         flag=1;
-         a[2]=1;                                                                                      
-         setlinestyle(SOLID_LINE,2,THICK_WIDTH);                                                                                     
-         line(139,6,266,133);
-         line(266,6,139,133);
-         continue;
-         }
+         clearmouseclick(WM_LBUTTONDOWN); num+=1; flag=1; a[2]=1; cross(2); continue;}
          if(a[3]==0&&ismouseclick(WM_LBUTTONDOWN)&&mousex()>272&&mousex()<399&&mousey()>6&&mousey()<133){
-         clearmouseclick(WM_LBUTTONDOWN);
-         num+=1;
-         flag=1;
-         a[3]=1;                                                                                    
-         setlinestyle(SOLID_LINE,2,THICK_WIDTH);                                                                                     
-         line(272,6,399,133);
-         line(399,6,272,133);
-         continue;
-         }
+         clearmouseclick(WM_LBUTTONDOWN); num+=1; flag=1; a[3]=1; cross(3); continue;}
          if(a[4]==0&&ismouseclick(WM_LBUTTONDOWN)&&mousex()>6&&mousex()<133&&mousey()>139&&mousey()<266){
-         clearmouseclick(WM_LBUTTONDOWN);
-         num+=1;
-         flag=1;
-         a[4]=1;                                                                                      
-         setlinestyle(SOLID_LINE,2,THICK_WIDTH);                                                                                     
-         line(6,139,133,266);
-         line(133,139,6,266);
-         continue;
-         }
+         clearmouseclick(WM_LBUTTONDOWN); num+=1; flag=1; a[4]=1; cross(4); continue;}
          if(a[5]==0&&ismouseclick(WM_LBUTTONDOWN)&&mousex()>139&&mousex()<266&&mousey()>139&&mousey()<266){
-         clearmouseclick(WM_LBUTTONDOWN);
-         num+=1;
-         flag=1;
-         a[5]=1;                                                                                     
-         setlinestyle(SOLID_LINE,2,THICK_WIDTH);                                                                                     
-         line(139,139,266,266);
-         line(266,139,139,266);
-         continue;
-         }
+         clearmouseclick(WM_LBUTTONDOWN); num+=1; flag=1; a[5]=1; cross(5); continue;}
          if(a[6]==0&&ismouseclick(WM_LBUTTONDOWN)&&mousex()>277&&mousex()<399&&mousey()>139&&mousey()<266){
-         clearmouseclick(WM_LBUTTONDOWN);
-         num+=1;
-         flag=1;
-         a[6]=1;                                                                                     
-         setlinestyle(SOLID_LINE,2,THICK_WIDTH);                                                                                     
-         line(272,139,399,266);
-         line(399,139,272,266);
-         continue;
-         }
+         clearmouseclick(WM_LBUTTONDOWN); num+=1; flag=1; a[6]=1; cross(6); continue;}
          if(a[7]==0&&ismouseclick(WM_LBUTTONDOWN)&&mousex()>6&&mousex()<133&&mousey()>272&&mousey()<399){
-         clearmouseclick(WM_LBUTTONDOWN);
-         num+=1;
-         flag=1;
-         a[7]=1;                                                                                      
-         setlinestyle(SOLID_LINE,2,THICK_WIDTH);                                                                                     
-         line(6,272,133,399);
-         line(133,272,6,399);
-         continue;
-         }
+         clearmouseclick(WM_LBUTTONDOWN); num+=1; flag=1; a[7]=1; cross(7); continue;}
          if(a[8]==0&&ismouseclick(WM_LBUTTONDOWN)&&mousex()>139&&mousex()<266&&mousey()>272&&mousey()<399){
-         clearmouseclick(WM_LBUTTONDOWN); num+=1; flag=1; a[8]=1;                                                                                                                                                                        
-         line(139,272,266,399);
-         line(266,272,139,399);
-         continue;
-         }
+         clearmouseclick(WM_LBUTTONDOWN); num+=1; flag=1; a[8]=1; cross(8); continue;}
          if(a[9]==0&&ismouseclick(WM_LBUTTONDOWN)&&mousex()>272&&mousex()<399&&mousey()>272&&mousey()<399){
-         clearmouseclick(WM_LBUTTONDOWN); num+=1; flag=1; a[9]=1;                                                                                     
-                                                                                             
-         line(272,272,399,399);
-         line(272,399,399,272);
-         continue;
-         }
+         clearmouseclick(WM_LBUTTONDOWN); num+=1; flag=1; a[9]=1; cross(9); continue;}
          continue;
          
          //ход бота;
@@ -1885,7 +1217,7 @@ void pvb(){
      if(a[j]==0){
      a[j]=4;
      circle(x1,y1,64);
-     j=10;            
+     break;            
      }                  
      }           
    }     
