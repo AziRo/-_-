@@ -6,9 +6,11 @@
 #include <ctime>
 
 const int N=9;
-  
+
+//Переменные для записи счёта;  
 int pscore=0,bscore=0,tscore=0; 
-  
+ 
+//Функция рисующая поле счёта игры;  
 void score(int n=0){
 if(n==1){
 setcolor(14);
@@ -98,7 +100,7 @@ int i;
 }
 
 void bvp(){
-     int a[N],i,j,y=-68,x1=-64,y1=-64,prob=0,flag=0,sum,num=1,random,ncheck=0;
+     int a[N],i,j,y=-68,prob=0,flag=0,sum,num=1,random,ncheck=0;
      for(i=1;i<=N;i++) a[i]=0;
     score();
     setlinestyle(SOLID_LINE,2,THICK_WIDTH);
@@ -254,7 +256,7 @@ void bvp(){
          else{a[9]=1; cross(9); continue;}    
         }
         if(a[6]==1){
-        if(a[1]==0&&a[4]==0&&a[7]==0){a[1]=1; cross(1); continue;}
+        if(a[1]==0&&a[2]==0&&a[3]==0){a[1]=1; cross(1); continue;}
         else {a[7]=1; cross(7); continue;}     
         }
         
@@ -275,24 +277,12 @@ void bvp(){
      
      //третий, четвёртый и пятый ход бота;
      if(num==3||num==4||num==5){                        
-          //проверка парных крестиков в строке;                   
+        //проверка парных крестиков в строке;                   
         for(j=0;j<7;j+=3){     
          if((a[j+1]+a[j+2]+a[j+3])==2){
-          if(j==0){
-           if(a[j+1]==0){a[1]=1; cross(1); ncheck=1; break;}        
-           if(a[j+2]==0){a[2]=1; cross(2); ncheck=1; break;}
-           if(a[j+3]==0){a[3]=1; cross(3); ncheck=1; break;}
-          }
-          if(j==3){
-           if(a[j+1]==0){a[4]=1; cross(4); ncheck=1; break;}
-           if(a[j+2]==0){a[5]=1; cross(5); ncheck=1; break;}
-           if(a[j+3]==0){a[6]=1; cross(6); ncheck=1; break;}         
-          }
-          if(j==6){
-           if(a[j+1]==0){a[7]=1; cross(7); ncheck=1; break;}
-           if(a[j+2]==0){a[8]=1; cross(8); ncheck=1; break;}
-           if(a[j+3]==0){a[9]=1; cross(9); ncheck=1; break;}         
-          }                              
+          if(a[j+1]==0){a[j+1]=1; cross(j+1); ncheck=1; break;}        
+          if(a[j+2]==0){a[j+2]=1; cross(j+2); ncheck=1; break;}
+          if(a[j+3]==0){a[j+3]=1; cross(j+3); ncheck=1; break;}                              
          }                              
         }
         if(ncheck==1)continue;
@@ -300,21 +290,9 @@ void bvp(){
       //проверка парных кресников в столбце;
         for(j=0;j<3;j++){
          if((a[j+1]+a[j+4]+a[j+7])==2){
-          if(j==0){
-           if(a[j+1]==0){a[1]=1; cross(1); ncheck=1; break;}
-           if(a[j+4]==0){a[4]=1; cross(4); ncheck=1; break;}
-           if(a[j+7]==0){a[7]=1; cross(7); ncheck=1; break;}         
-          }
-          if(j==1){
-           if(a[j+1]==0){a[2]=1; cross(2); ncheck=1; break;}
-           if(a[j+4]==0){a[5]=1; cross(5); ncheck=1; break;}
-           if(a[j+7]==0){a[8]=1; cross(8); ncheck=1; break;}          
-          }
-          if(j==2){
-           if(a[j+1]==0){a[3]=1; cross(3); ncheck=1; break;}
-           if(a[j+4]==0){a[6]=1; cross(6); ncheck=1; break;}
-           if(a[j+7]==0){a[9]=1; cross(9); ncheck=1; break;}         
-          }                                
+          if(a[j+1]==0){a[j+1]=1; cross(j+1); ncheck=1; break;}
+          if(a[j+4]==0){a[j+4]=1; cross(j+4); ncheck=1; break;}
+          if(a[j+7]==0){a[j+7]=1; cross(j+7); ncheck=1; break;}                                         
          }           
         }
         if(ncheck==1)continue;
@@ -334,21 +312,9 @@ void bvp(){
         //проверка парных ноликов в строке;                   
         for(j=0;j<7;j+=3){     
          if((a[j+1]+a[j+2]+a[j+3])==8){
-          if(j==0){
-           if(a[j+1]==0){a[1]=1; cross(1); ncheck=1; break;}        
-           if(a[j+2]==0){a[2]=1; cross(2); ncheck=1; break;}
-           if(a[j+3]==0){a[3]=1; cross(3); ncheck=1; break;}
-          }
-          if(j==3){
-           if(a[j+1]==0){a[4]=1; cross(4); ncheck=1; break;}
-           if(a[j+2]==0){a[5]=1; cross(5); ncheck=1; break;}
-           if(a[j+3]==0){a[6]=1; cross(6); ncheck=1; break;}         
-          }
-          if(j==6){
-           if(a[j+1]==0){a[7]=1; cross(7); ncheck=1; break;}
-           if(a[j+2]==0){a[8]=1; cross(8); ncheck=1; break;}
-           if(a[j+3]==0){a[9]=1; cross(9); ncheck=1; break;}         
-          }                              
+          if(a[j+1]==0){a[j+1]=1; cross(j+1); ncheck=1; break;}        
+          if(a[j+2]==0){a[j+2]=1; cross(j+2); ncheck=1; break;}
+          if(a[j+3]==0){a[j+3]=1; cross(j+3); ncheck=1; break;}                             
          }                              
         }
         if(ncheck==1)continue;
@@ -356,21 +322,9 @@ void bvp(){
         //проверка парных ноликов в столбце;
         for(j=0;j<3;j++){
          if((a[j+1]+a[j+4]+a[j+7])==8){
-          if(j==0){
-           if(a[j+1]==0){a[1]=1; cross(1); ncheck=1; break;}
-           if(a[j+4]==0){a[4]=1; cross(4); ncheck=1; break;}
-           if(a[j+7]==0){a[7]=1; cross(7); ncheck=1; break;}         
-          }
-          if(j==1){
-           if(a[j+1]==0){a[2]=1; cross(2); ncheck=1; break;}
-           if(a[j+4]==0){a[5]=1; cross(5); ncheck=1; break;}
-           if(a[j+7]==0){a[8]=1; cross(8); ncheck=1; break;}         
-          }
-          if(j==2){
-           if(a[j+1]==0){a[3]=1; cross(3); ncheck=1; break;}
-           if(a[j+4]==0){a[6]=1; cross(6); ncheck=1; break;}
-           if(a[j+7]==0){a[9]=1; cross(9); ncheck=1; break;}         
-          }                                
+          if(a[j+1]==0){a[j+1]=1; cross(j+1); ncheck=1; break;}
+          if(a[j+4]==0){a[j+4]=1; cross(j+4); ncheck=1; break;}
+          if(a[j+7]==0){a[j+7]=1; cross(j+7); ncheck=1; break;}                                        
          }           
         }
         if(ncheck==1)continue;
@@ -386,17 +340,32 @@ void bvp(){
          if(a[5]==0){a[5]=1; cross(5); continue;}
          if(a[7]==0){a[7]=1; cross(7); continue;}                        
        }
-       //Тактика 2;
-       if(a[8]+a[1]+a[4]+a[7]==2){a[7]=1; cross(7); continue;}
-       if(a[8]+a[3]+a[6]+a[9]==2){a[9]=1; cross(9); continue;}
-       if(a[2]+a[7]+a[4]+a[1]==2){a[1]=1; cross(1); continue;}
-       if(a[2]+a[9]+a[6]+a[3]==2){a[3]=1; cross(3); continue;}
-       if(a[6]+a[1]+a[2]+a[3]==2){a[3]=1; cross(3); continue;}
-       if(a[6]+a[7]+a[8]+a[9]==2){a[9]=1; cross(9); continue;}
-       if(a[4]+a[3]+a[2]+a[1]==2){a[1]=1; cross(1); continue;}
-       if(a[4]+a[9]+a[8]+a[7]==2){a[7]=1; cross(7); continue;}
        
-       //другие варианты;
+       //Тактика 1;
+       if(a[1]+a[3]+a[5]==2){
+        if(a[1]==0){a[1]=1; cross(1); continue;}
+        if(a[3]==0){a[3]=1; cross(3); continue;}                      
+       }
+       if(a[1]+a[5]+a[7]==2){
+        if(a[1]==0){a[1]=1; cross(1); continue;}
+        if(a[7]==0){a[7]=1; cross(7); continue;}                      
+       }
+       if(a[3]+a[5]+a[9]==2){
+        if(a[9]==0){a[9]=1; cross(9); continue;}
+        if(a[3]==0){a[3]=1; cross(3); continue;}                      
+       }
+       if(a[7]+a[5]+a[9]==2){
+        if(a[9]==0){a[9]=1; cross(9); continue;}
+        if(a[7]==0){a[7]=1; cross(7); continue;}                      
+       }
+       
+       //Тактика 2;
+       if(a[8]+a[1]+a[4]+a[7]==2||a[4]+a[9]+a[8]+a[7]==2){a[7]=1; cross(7); continue;}
+       if(a[8]+a[3]+a[6]+a[9]==2||a[6]+a[7]+a[8]+a[9]==2){a[9]=1; cross(9); continue;}
+       if(a[2]+a[7]+a[4]+a[1]==2||a[4]+a[3]+a[2]+a[1]==2){a[1]=1; cross(1); continue;}
+       if(a[2]+a[9]+a[6]+a[3]==2||a[6]+a[1]+a[2]+a[3]==2){a[3]=1; cross(3); continue;}
+       
+       //другие варианты хода;
        if(a[5]==0){a[5]=1; cross(5); continue;}
        casual_play(a,1);   
      }
@@ -437,7 +406,7 @@ void bvp(){
      
 //игрок против бота;
 void pvb(){
-    int a[N],i,j,y=-68,x1=-64,y1=-64,prob=0,flag=0,sum,num=0,random,ncheck=0;
+    int a[N],i,j,y=-68,prob=0,flag=0,sum,num=0,random,ncheck=0;
     for(i=1;i<=N;i++) a[i]=0;
     score();
     setlinestyle(SOLID_LINE,2,THICK_WIDTH); 
@@ -934,17 +903,17 @@ int finmenu(){
      setcolor(14);
      outtextxy(60,270,"EXIT TO MAIN MENU");
      while(flag){                      
-     if(ismouseclick(WM_LBUTTONDOWN)&&mousex()>95&&mousex()<160&&mousey()>150&&mousey()<185){
-     return(1);
+      if(ismouseclick(WM_LBUTTONDOWN)&&mousex()>95&&mousex()<160&&mousey()>150&&mousey()<185){
+       return(1);
+      }
+      if(ismouseclick(WM_LBUTTONDOWN)&&mousex()>245&&mousex()<300&&mousey()>150&&mousey()<185){
+       return(0);
+      } 
+      if(ismouseclick(WM_LBUTTONDOWN)&&mousex()>55&&mousex()<370&&mousey()>265&&mousey()<300){                                                                                        
+       return(2);
+      } 
      }
-     if(ismouseclick(WM_LBUTTONDOWN)&&mousex()>245&&mousex()<300&&mousey()>150&&mousey()<185){
-     return(0);
-     } 
-     if(ismouseclick(WM_LBUTTONDOWN)&&mousex()>55&&mousex()<370&&mousey()>265&&mousey()<300){                                                                                        
-     return(2);
-     } 
-     }
-     }
+    }
      
 int main(){
     srand(time(NULL));    
@@ -1000,46 +969,34 @@ if(smenu==1){
     }
     }
 }
-play:   
+//игрок против игрока;     
 if(pmenu==1){
-closegraph();             
-//игрок против игрока;                                               
+play:             
+closegraph();                                                          
 grid();    
 pvp();
 delay(1300);
 closegraph();
 initwindow(405,405);
 finmenu();
-if(finmenu()==1){
-closegraph();                                 
-goto play;
+if(finmenu()==1){closegraph(); goto play;}
+if(finmenu()==2){closegraph(); initwindow(405,405); goto menu;}
 }
-if(finmenu()==2){                  
-closegraph();
-initwindow(405,405);
-goto menu;
-}
-}
+
+//игрок против бота; 
 if(pmenu==2){
 play_one:             
-closegraph();             
-//игрок против бота;                                               
+closegraph();                                                           
 grid();    
 pvb();
 delay(1300);
 closegraph();
 initwindow(405,405);
 finmenu();
-if(finmenu()==1){
-closegraph();                                 
-goto play_two;
+if(finmenu()==1){closegraph(); goto play_two;}
+if(finmenu()==2){closegraph(); initwindow(405,405); goto menu;}
 }
-if(finmenu()==2){                
-closegraph();
-initwindow(405,405);
-goto menu;
-}
-}
+
 //Бот против игрока;
 if(pmenu==3){
 play_two:             
@@ -1050,15 +1007,8 @@ delay(1300);
 closegraph();
 initwindow(405,405);
 finmenu();
-if(finmenu()==1){
-closegraph();                                 
-goto play_one;
-}
-if(finmenu()==2){                
-closegraph();
-initwindow(405,405);
-goto menu;
-}
+if(finmenu()==1){closegraph(); goto play_one;}
+if(finmenu()==2){closegraph(); initwindow(405,405); goto menu;}
 }
 closegraph();     
 }
