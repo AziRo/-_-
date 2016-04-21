@@ -3,7 +3,6 @@
 #include <math.h>
 #include <stdlib.h>
 #include <conio.h>
-////
 #include <ctime>
 
 const int N=9;
