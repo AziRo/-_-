@@ -699,7 +699,7 @@ if(finmenu()==2){closegraph(); initwindow(405,405); goto menu;}
 }
 
 //игрок против бота; 
-if(pmenu==2){
+if(pmenu == 2){
 play_one:             
 closegraph();                                                           
 grid();    
@@ -708,8 +708,8 @@ delay(1300);
 closegraph();
 initwindow(405,405);
 finmenu();
-if(finmenu()==1){closegraph(); goto play_two;}
-if(finmenu()==2){closegraph(); initwindow(405,405); goto menu;}
+if(finmenu() == 1){closegraph(); goto play_two;}
+if(finmenu() == 2){closegraph(); initwindow(405,405); goto menu;}
 }
 
 //Бот против игрока;
